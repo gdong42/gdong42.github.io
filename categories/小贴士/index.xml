@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>小贴士 on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/categories/%E5%B0%8F%E8%B4%B4%E5%A3%AB/</link>
+    <description>Recent content in 小贴士 on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 27 Jun 2014 17:21:02 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/categories/%E5%B0%8F%E8%B4%B4%E5%A3%AB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用 SimpleDateFormat 时奇怪的 NumberFormatException</title>
+      <link>https://donggan.me/post/weird-nfe-using-simpledateformat/</link>
+      <pubDate>Fri, 27 Jun 2014 17:21:02 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/weird-nfe-using-simpledateformat/</guid>
+      <description>JDK 中的 &lt;code&gt;SimpleDateFormat&lt;/code&gt; 是线程非安全的, 因此当在并发访问的情形下使用时一定要当心。尽管 Javadoc API 文档中明确指出了该类是未同步的，可能很多人在遇到了其导致的问题之前都不会注意到这点。</description>
+    </item>
+    
+  </channel>
+</rss>

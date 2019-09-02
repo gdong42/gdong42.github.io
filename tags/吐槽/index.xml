@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>吐槽 on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/tags/%E5%90%90%E6%A7%BD/</link>
+    <description>Recent content in 吐槽 on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 16 May 2016 23:47:31 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/tags/%E5%90%90%E6%A7%BD/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>荒唐的 Go 语言缩写词大写惯例</title>
+      <link>https://donggan.me/post/golangs-ridiculous-common-initialisms/</link>
+      <pubDate>Mon, 16 May 2016 23:47:31 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/golangs-ridiculous-common-initialisms/</guid>
+      <description>Golang 是在编程风格和代码组织等一些决定上是出了名的固执己见。尽管 Golang 提供了一个不错的 lint 工具，但是却没有提供任何对此工具的配置机制。Golang 的哲</description>
+    </item>
+    
+  </channel>
+</rss>

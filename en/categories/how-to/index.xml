@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>how to on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/en/categories/how-to/</link>
+    <description>Recent content in how to on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 16 Dec 2018 00:15:26 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/en/categories/how-to/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction to Factory Pattern (1): Simple Factory Pattern</title>
+      <link>https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/</link>
+      <pubDate>Sun, 16 Dec 2018 00:15:26 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/</guid>
+      <description>Nowadays, design patterns are not that popular to talk about. This could be related to the rapid iteration of web services, and the popularity of Micro Services. Design patterns were once considered useless dogma, thus as an anti-pattern, during the hype of Function Programming.
+Of course, design patterns might have been thrown away as the essence of Object-Oriented Programming, because Functional Programming was preferred to OOP and was a hype during the time.</description>
+    </item>
+    
+  </channel>
+</rss>

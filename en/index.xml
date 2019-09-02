@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/en/</link>
+    <description>Recent content on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 16 Dec 2018 00:15:26 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/en/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://donggan.me/en/about/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/about/</guid>
+      <description>Comming soon..</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Factory Pattern (1): Simple Factory Pattern</title>
+      <link>https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/</link>
+      <pubDate>Sun, 16 Dec 2018 00:15:26 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/</guid>
+      <description>Nowadays, design patterns are not that popular to talk about. This could be related to the rapid iteration of web services, and the popularity of Micro Services. Design patterns were once considered useless dogma, thus as an anti-pattern, during the hype of Function Programming.
+Of course, design patterns might have been thrown away as the essence of Object-Oriented Programming, because Functional Programming was preferred to OOP and was a hype during the time.</description>
+    </item>
+    
+    <item>
+      <title>Golang&#39;s Ridiculous Common Initialisms</title>
+      <link>https://donggan.me/en/post/golangs-ridiculous-common-initialisms/</link>
+      <pubDate>Mon, 16 May 2016 23:47:31 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/post/golangs-ridiculous-common-initialisms/</guid>
+      <description>Golang is well known for its opinionated in coding style. It provides a lint tool thoughtfully, which is good, but failed to provide any mechanism to override or config it, except not using it at all.
+As one coming from Java world, knowing Go’s in favor of camel case is pleasant. Not that much when realizing it treats common acronym words as all caps in variable or function names, such as userID instead of userId.</description>
+    </item>
+    
+    <item>
+      <title>Weird NumberFormatException When Using SimpleDateFormat</title>
+      <link>https://donggan.me/en/post/weird-nfe-using-simpledateformat/</link>
+      <pubDate>Fri, 27 Jun 2014 17:21:02 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/post/weird-nfe-using-simpledateformat/</guid>
+      <description>The &lt;code&gt;SimpleDateFormat&lt;/code&gt; from JDK is not thread-safe, so be careful when it is used in a concurrent environment. Although it is clearly stated in the JavaDoc of the API that it’s not synchronized, I think many would not notice it until we encounter problems caused by the issue.</description>
+    </item>
+    
+  </channel>
+</rss>

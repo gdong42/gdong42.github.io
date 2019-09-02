@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>thread safety on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/en/tags/thread-safety/</link>
+    <description>Recent content in thread safety on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 27 Jun 2014 17:21:02 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/en/tags/thread-safety/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Weird NumberFormatException When Using SimpleDateFormat</title>
+      <link>https://donggan.me/en/post/weird-nfe-using-simpledateformat/</link>
+      <pubDate>Fri, 27 Jun 2014 17:21:02 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/post/weird-nfe-using-simpledateformat/</guid>
+      <description>The &lt;code&gt;SimpleDateFormat&lt;/code&gt; from JDK is not thread-safe, so be careful when it is used in a concurrent environment. Although it is clearly stated in the JavaDoc of the API that it’s not synchronized, I think many would not notice it until we encounter problems caused by the issue.</description>
+    </item>
+    
+  </channel>
+</rss>

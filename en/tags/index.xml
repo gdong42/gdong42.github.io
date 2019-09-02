@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/en/tags/</link>
+    <description>Recent content in Tags on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 16 Dec 2018 00:15:26 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>design patterns</title>
+      <link>https://donggan.me/en/tags/design-patterns/</link>
+      <pubDate>Sun, 16 Dec 2018 00:15:26 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/tags/design-patterns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://donggan.me/en/tags/java/</link>
+      <pubDate>Sun, 16 Dec 2018 00:15:26 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OOP</title>
+      <link>https://donggan.me/en/tags/oop/</link>
+      <pubDate>Sun, 16 Dec 2018 00:15:26 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/tags/oop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>complaints</title>
+      <link>https://donggan.me/en/tags/complaints/</link>
+      <pubDate>Mon, 16 May 2016 23:47:31 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/tags/complaints/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>https://donggan.me/en/tags/golang/</link>
+      <pubDate>Mon, 16 May 2016 23:47:31 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>thread safety</title>
+      <link>https://donggan.me/en/tags/thread-safety/</link>
+      <pubDate>Fri, 27 Jun 2014 17:21:02 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/tags/thread-safety/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Introduction to Factory Pattern (1): Simple Factory Pattern - Gan&#39;s Blog - Dumps to digest.</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Gan Dong" /><meta name="description" content="Nowadays, design patterns are not that popular to talk about. This could be related to the rapid iteration of web services, and the popularity of Micro Services. Design patterns were once considered useless dogma, thus as an anti-pattern, during the hype of Function Programming.
+Of course, design patterns might have been thrown away as the essence of Object-Oriented Programming, because Functional Programming was preferred to OOP and was a hype during the time." /><meta name="keywords" content="Gan Dong, 董干, donggan, donggan.me" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/main.css">
+
+
+<meta property="og:title" content="Introduction to Factory Pattern (1): Simple Factory Pattern" />
+<meta property="og:description" content="Nowadays, design patterns are not that popular to talk about. This could be related to the rapid iteration of web services, and the popularity of Micro Services. Design patterns were once considered useless dogma, thus as an anti-pattern, during the hype of Function Programming.
+Of course, design patterns might have been thrown away as the essence of Object-Oriented Programming, because Functional Programming was preferred to OOP and was a hype during the time." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/" />
+<meta property="article:published_time" content="2018-12-16T00:15:26+08:00" />
+<meta property="article:modified_time" content="2018-12-16T00:15:26+08:00" />
+<meta itemprop="name" content="Introduction to Factory Pattern (1): Simple Factory Pattern">
+<meta itemprop="description" content="Nowadays, design patterns are not that popular to talk about. This could be related to the rapid iteration of web services, and the popularity of Micro Services. Design patterns were once considered useless dogma, thus as an anti-pattern, during the hype of Function Programming.
+Of course, design patterns might have been thrown away as the essence of Object-Oriented Programming, because Functional Programming was preferred to OOP and was a hype during the time.">
+
+
+<meta itemprop="datePublished" content="2018-12-16T00:15:26&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-16T00:15:26&#43;08:00" />
+<meta itemprop="wordCount" content="870">
+
+
+
+<meta itemprop="keywords" content="design patterns,OOP,Java," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Introduction to Factory Pattern (1): Simple Factory Pattern"/>
+<meta name="twitter:description" content="Nowadays, design patterns are not that popular to talk about. This could be related to the rapid iteration of web services, and the popularity of Micro Services. Design patterns were once considered useless dogma, thus as an anti-pattern, during the hype of Function Programming.
+Of course, design patterns might have been thrown away as the essence of Object-Oriented Programming, because Functional Programming was preferred to OOP and was a hype during the time."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/en/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/en/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/en/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/en/"> 
+          
+            Home
+          
+        </a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/post/"> 
+          
+            Archives
+          
+        </a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/tags/"> 
+          
+            Tags
+          
+        </a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/categories/"> 
+          
+            Categories
+          
+        </a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/about/"> 
+          
+            About
+          
+        </a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Introduction to Factory Pattern (1): Simple Factory Pattern</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-12-16 </span>
+        <div class="post-category">
+            <a href="/en/categories/how-to/"> how to </a>
+            </div>
+          <span class="more-meta"> 870 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#introduction">Introduction</a>
+<ul>
+<li><a href="#simple-factory-pattern">Simple Factory Pattern</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+<div class="post-translations">
+  <h5><i>This post is also available in following languages</i></h5>
+  <ul>
+    
+    <li>
+      <a href="https://donggan.me/post/factory-pattern-1-simple-factory-pattern/">[中文] 工厂模式简介（一）：简单工厂模式 (1531 words)</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+    <div class="post-content">
+      
+
+<p><img src="/img/james-kresser-1131299-unsplash-1024x618.jpg" alt="Cover Image" /></p>
+
+<p>Nowadays, design patterns are not that popular to talk about. This could be related to the rapid iteration of web services, and the popularity of Micro Services. Design patterns were once considered useless dogma, thus as an anti-pattern, during the hype of Function Programming.</p>
+
+<p>Of course, design patterns might have been thrown away as the essence of Object-Oriented Programming, because Functional Programming was preferred to OOP and was a hype during the time.</p>
+
+<p>But if we think back, these design patterns are actually useful experiences extracted from practice. They do improve readability and scalability of programs to some extent. On the other hand, as well known conventions, design patterns deepen understanding between author and reader. In this sense, they can be considered as a medium of communication. Of course, this has to be used at correct scenarios. In terms of correct scenarios, we are talking about suitable scenarios — not using because we want to use, but for practical purpose.</p>
+
+<p>In this blog post, I will introduce one of the most used design patterns: <strong>Factory Pattern</strong>, and talk about my understanding on it.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Factory Pattern could arguably be the most widely used design pattern in Java. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create object. In Factory pattern, we create an object through a factory without exposing the creation logic to the client and refer to newly created object using a common interface.</p>
+
+<p>Let’s first look at the simplist factory pattern.</p>
+
+<h3 id="simple-factory-pattern">Simple Factory Pattern</h3>
+
+<p>In my daily coding life, Simple Factory Pattern is enough to use. It suits well when we want to use a factory class to encapsulate creation logic of some product class that we would like to create. This product class can be extended by many sub-classes, which we are usually not interested in. We would rather like the factory to do its work, choose suitable sub-classes and create corresponding instances, by passing type information into the factory method.</p>
+
+<p>Let’s look at a concret example.</p>
+
+<p>Say we have a product class called <code>Car</code>, stands for cars. Different car factory can manufactory different cars, which can be considered as sub-classes of <code>Car</code>. So we can have <code>BmwCar</code>, <code>VolvoCar</code>, <code>TeslaCar</code>, and so on, demonstrated below.</p>
+
+<figure>
+    <img src="/img/simple-factory.png"/> <figcaption>
+            <h4>A Simple Factory Example Diagram</h4>
+        </figcaption>
+</figure>
+
+
+<p>Suppose we have a magic car factory called <code>CarFactory</code>, which is able to create multiple brands of cars. In order words, it can create <code>BmwCar</code>, <code>VolvoCar</code> and <code>TeslaCar</code>. When some type of <code>Car</code> is requested, the only thing to do is to tell the <code>CarFactory</code> what type of <code>Car</code> to create, and leave creating the car to this factory. How the car is manufactured does not concern, only that the factory will deliver the car fufilling all the requirements concerns.</p>
+
+<p>As a client of this factory, how do I tell <code>CarFactory</code> which type of cars to create? It can be passed to <code>createCar()</code> method of <code>CarFactory</code> via method arguments.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Car</span> <span class="nf">car1</span> <span class="o">=</span> <span class="n">SimpleCarFactory</span><span class="p">.</span><span class="na">createCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">BMW</span><span class="p">);</span>
+<span class="n">car1</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span>
+
+<span class="n">Car</span> <span class="nf">car2</span> <span class="o">=</span> <span class="n">SimpleCarFactory</span><span class="p">.</span><span class="na">createCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">VOLVO</span><span class="p">);</span>
+<span class="n">car2</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span>
+
+<span class="n">Car</span> <span class="nf">car3</span> <span class="o">=</span> <span class="n">SimpleCarFactory</span><span class="p">.</span><span class="na">createCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">TESLA</span><span class="p">);</span>
+<span class="n">car3</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Inside this <code>createCar()</code> method, the factory can choose the actual car type to create based on arguments passed in.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">SimpleCarFactory</span> <span class="p">{</span>
+
+  <span class="kd">public</span> <span class="nf">static</span> <span class="n">Car</span> <span class="nf">createCar</span><span class="p">(</span><span class="n">CarType</span> <span class="nf">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;type cannot be null&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">CarType</span><span class="p">.</span><span class="na">BMW</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="n">BmwCar</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">CarType</span><span class="p">.</span><span class="na">VOLVO</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="n">VolvoCar</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">CarType</span><span class="p">.</span><span class="na">TESLA</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="n">TeslaCar</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Unknown car type: &#34;</span> <span class="o">+</span> <span class="n">type</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>See complete code example at this github repo: <a href="https://github.com/gdong42/factory-pattern">https://github.com/gdong42/factory-pattern</a></p>
+
+<p>What’s the benefit of this pattern? In this pattern, the caller side does not need to know the exact type implementation and its creation details, it only provides the required type name information. So this pattern reduces the complexity of the client, and decouples the creation logic of various implementation from invocation logic to some extent.</p>
+
+<p>What about the cons? Let’s think about it in real world. There are few such factories. Because this magical factory needs to know how to create every product, which is almost impossible. OOP reflects the real world, therefore it is not reasonable to have a super magic factory that can create all type of products as well in the software world. In other words, each time when we want to add a new car type, we need to update <code>createCar()</code>. This should better be avoided.</p>
+
+<p>Another problem is that <code>SimpleCarFactory</code> class has to depend on all car types, due to the truth that it contains all creation invocation logic in one giant factory. This leads to the client code coupling all product types,  which might never be called by the client, and thus should be optional instead of mandatory dependencies. What we expect is that when we need some kind of product, we use a factory to create it, only with required dependency that has the underlying implementation module.</p>
+
+<p>How to improve this pattern to solve above problems? We will discuss this in the next installment of this topic.</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Gan Dong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2018-12-16
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/en/tags/design-patterns/">design patterns</a>
+          <a href="/en/tags/oop/">OOP</a>
+          <a href="/en/tags/java/">Java</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/en/post/golangs-ridiculous-common-initialisms/">
+            <span class="next-text nav-default">Golang&#39;s Ridiculous Common Initialisms</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/__gdong__" class="iconfont icon-twitter" title="twitter"></a>
+  <a href="https://donggan.me/en/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2014 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">董干</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77549857-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
