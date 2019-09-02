@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu 16.04 on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/tags/ubuntu-16.04/</link>
+    <description>Recent content in Ubuntu 16.04 on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 14 Jan 2019 23:32:34 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/tags/ubuntu-16.04/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在 Ubuntu 16.04 上安装 shadowsocks server</title>
+      <link>https://donggan.me/post/install-shadowsocks-on-ubuntu-16-04/</link>
+      <pubDate>Mon, 14 Jan 2019 23:32:34 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/install-shadowsocks-on-ubuntu-16-04/</guid>
+      <description>Shadowsocks 的是一个 Socks 代理服务器软件，这里不多说它是做什么用的。 由于速度和延迟的原因，我使用 shadowsocks 会偶尔换不同 VPS 供应商的服务器。这是第一个头疼的地方：需要</description>
+    </item>
+    
+  </channel>
+</rss>

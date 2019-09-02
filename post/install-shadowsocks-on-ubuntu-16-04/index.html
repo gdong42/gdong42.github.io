@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>在 Ubuntu 16.04 上安装 shadowsocks server - Gan&#39;s Blog - Dumps to digest.</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="董干" /><meta name="description" content="Shadowsocks 的是一个 Socks 代理服务器软件，这里不多说它是做什么用的。 由于速度和延迟的原因，我使用 shadowsocks 会偶尔换不同 VPS 供应商的服务器。这是第一个头疼的地方：需要" /><meta name="keywords" content="Ubuntu, 代理, 科学上网, shadowsocks, 教程, socks" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://donggan.me/post/install-shadowsocks-on-ubuntu-16-04/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/main.css">
+
+
+<meta property="og:title" content="在 Ubuntu 16.04 上安装 shadowsocks server" />
+<meta property="og:description" content="Shadowsocks 的是一个 Socks 代理服务器软件，这里不多说它是做什么用的。 由于速度和延迟的原因，我使用 shadowsocks 会偶尔换不同 VPS 供应商的服务器。这是第一个头疼的地方：需要" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://donggan.me/post/install-shadowsocks-on-ubuntu-16-04/" />
+<meta property="article:published_time" content="2019-01-14T23:32:34+08:00" />
+<meta property="article:modified_time" content="2019-01-14T23:32:34+08:00" />
+<meta itemprop="name" content="在 Ubuntu 16.04 上安装 shadowsocks server">
+<meta itemprop="description" content="Shadowsocks 的是一个 Socks 代理服务器软件，这里不多说它是做什么用的。 由于速度和延迟的原因，我使用 shadowsocks 会偶尔换不同 VPS 供应商的服务器。这是第一个头疼的地方：需要">
+
+
+<meta itemprop="datePublished" content="2019-01-14T23:32:34&#43;08:00" />
+<meta itemprop="dateModified" content="2019-01-14T23:32:34&#43;08:00" />
+<meta itemprop="wordCount" content="773">
+
+
+
+<meta itemprop="keywords" content="shadowsocks,Ubuntu,Ubuntu 16.04," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在 Ubuntu 16.04 上安装 shadowsocks server"/>
+<meta name="twitter:description" content="Shadowsocks 的是一个 Socks 代理服务器软件，这里不多说它是做什么用的。 由于速度和延迟的原因，我使用 shadowsocks 会偶尔换不同 VPS 供应商的服务器。这是第一个头疼的地方：需要"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在 Ubuntu 16.04 上安装 shadowsocks server</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-01-14 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
+            </div>
+          <span class="more-meta"> 约 773 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+
+    <div class="post-content">
+      <p>Shadowsocks 的是一个 Socks 代理服务器软件，这里不多说它是做什么用的。</p>
+
+<p>由于速度和延迟的原因，我使用 shadowsocks 会偶尔换不同 VPS 供应商的服务器。这是第一个头疼的地方：需要找个速度稳定的服务商。这里我试过很多，改天有时间专门写篇文章可以简单介绍下。第二个头疼的地方就是，每次安装都需要现找安装方法，很是麻烦。所以这次我把安装的过程记录下来，希望能帮助看到这篇文章的读者们。</p>
+
+<p>先找好云服务或者 VPS 提供商，开好实例。这里我选择用 Ubuntu 16.04。实例的大小其实按照最小的实例就足够用，有 512M 内存的就选 512M 内存的，没有就选 1G 的实例就好。各家服务商开实例的过程略有不同，这里略过不表。</p>
+
+<p>我们从开好实例后 ssh 登录上服务器开始。下面假设使用 root 账户登录。</p>
+
+<ol>
+<li><p>安装 python：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ apt install python</code></pre></td></tr></table>
+</div>
+</div>
+<p>确保 python 是 2.6 或 2.7 版本。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ python --version
+Python <span class="m">2</span>.7.12</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>安装 pip（python 的包管理程序）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ apt install python-pip</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>安装 shadowsocks</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ pip install shadowsocks</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>创建 shadowsocks 的配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">echo</span> <span class="s1">&#39;{
+</span><span class="s1">    &#34;server”:”0.0.0.0&#34;,
+</span><span class="s1">    &#34;server_port&#34;:22222,
+</span><span class="s1">    &#34;local_address&#34;: &#34;127.0.0.1&#34;,
+</span><span class="s1">    &#34;local_port&#34;:1080,
+</span><span class="s1">    &#34;password”:”密码&#34;,
+</span><span class="s1">    &#34;timeout&#34;:300,
+</span><span class="s1">    &#34;method&#34;:&#34;aes-256-cfb&#34;,
+</span><span class="s1">    &#34;fast_open&#34;: false
+</span><span class="s1">}&#39;</span> &gt; /etc/shadowsocks.json</code></pre></td></tr></table>
+</div>
+</div>
+<p>上述命令会创建好配置文件。注意密码部分自己设置一个专用密码即可，监听的端口、加密方式和超时时间等参数，也可以根据自己的需要进行调整。</p></li>
+
+<li><p>启动 shadowsocks 服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ ssserver -c /etc/shadowsocks.json -d start</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>查看服务是否启动成功</p>
+
+<p>通过日志查看：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ less /var/log/shadowsocks.log</code></pre></td></tr></table>
+</div>
+</div>
+<p>通过进程查看：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ ps -ef <span class="p">|</span> grep ssserver
+root      <span class="m">7575</span>     <span class="m">1</span>  <span class="m">0</span> <span class="m">05</span>:15 ?        <span class="m">00</span>:00:00 /usr/bin/python /usr/local/bin/ssserver -c /etc/shadowsocks.json -d start</code></pre></td></tr></table>
+</div>
+</div>
+<p>有上面的进程，就说明启动成功。</p></li>
+
+<li><p>设置自动启动</p>
+
+<p>有的时候服务器实例可能会遇到维护重启，这个时候如果我们的 shadowsocks 服务能够随着系统启动，那会比较省事。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">echo</span> <span class="s2">&#34;ssserver -c /etc/shadowsocks.json -d start&#34;</span> &gt;&gt; /etc/rc.local</code></pre></td></tr></table>
+</div>
+</div>
+<p>运行上面这个命令，我们会把启动 shadowsocks 的命令加到系统启动过程中。这样，不管什么时候，只要系统启动了，shadowsocks 服务就在。</p>
+
+<p>至此，服务端配置完毕。</p>
+
+<p>客户端的配置，就不多说了，和上面服务端的配置保持一致就可以。另外服务端 ip 记得要填写这个实例的公网 IP 地址。</p></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">董干</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-01-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/shadowsocks/">shadowsocks</a>
+          <a href="/tags/ubuntu/">Ubuntu</a>
+          <a href="/tags/ubuntu-16.04/">Ubuntu 16.04</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/factory-pattern-1-simple-factory-pattern/">
+            <span class="next-text nav-default">工厂模式简介（一）：简单工厂模式</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'donggan-me';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/__gdong__" class="iconfont icon-twitter" title="twitter"></a>
+  <a href="https://donggan.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2014 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">董干</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77549857-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

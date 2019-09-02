@@ -23,15 +23,15 @@
   </url>
   
   <url>
-    <loc>https://donggan.me/tags/java/</loc>
+    <loc>https://donggan.me/post/</loc>
     <lastmod>2019-09-01T21:37:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://donggan.me/post/</loc>
-    <lastmod>2019-09-01T21:37:00+08:00</lastmod>
+    <loc>https://donggan.me/tags/shadowsocks/</loc>
+    <lastmod>2019-01-14T23:32:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -44,14 +44,42 @@
   </url>
   
   <url>
-    <loc>https://donggan.me/post/factory-pattern-1-simple-factory-pattern/</loc>
-    <lastmod>2018-12-16T00:15:26+08:00</lastmod>
+    <loc>https://donggan.me/tags/ubuntu/</loc>
+    <lastmod>2019-01-14T23:32:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/ubuntu-16.04/</loc>
+    <lastmod>2019-01-14T23:32:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/post/install-shadowsocks-on-ubuntu-16-04/</loc>
+    <lastmod>2019-01-14T23:32:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/categories/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2019-01-14T23:32:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/java/</loc>
+    <lastmod>2019-09-01T21:37:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/post/factory-pattern-1-simple-factory-pattern/</loc>
     <lastmod>2018-12-16T00:15:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
