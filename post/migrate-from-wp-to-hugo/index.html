@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>从 Wordpress 迁移到 Hugo - Gan&#39;s Blog - Dumps to digest.</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="董干" /><meta name="description" content="博客搬家就像真的搬家一样折腾。" /><meta name="keywords" content="wordpress, hugo, migrating, blogging, blog, 博客, 博客迁移" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://donggan.me/post/migrate-from-wp-to-hugo/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/main.css">
+
+
+<meta property="og:title" content="从 Wordpress 迁移到 Hugo" />
+<meta property="og:description" content="博客搬家就像真的搬家一样折腾。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://donggan.me/post/migrate-from-wp-to-hugo/" />
+<meta property="article:published_time" content="2019-09-08T19:22:24+08:00" />
+<meta property="article:modified_time" content="2019-09-08T19:22:24+08:00" />
+<meta itemprop="name" content="从 Wordpress 迁移到 Hugo">
+<meta itemprop="description" content="博客搬家就像真的搬家一样折腾。">
+
+
+<meta itemprop="datePublished" content="2019-09-08T19:22:24&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-08T19:22:24&#43;08:00" />
+<meta itemprop="wordCount" content="4470">
+
+
+
+<meta itemprop="keywords" content="wordpress,hugo,blog," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从 Wordpress 迁移到 Hugo"/>
+<meta name="twitter:description" content="博客搬家就像真的搬家一样折腾。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item"></li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item"></li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/en/">
+        <li class="mobile-menu-item"></li>
+      </a>
+  </ul>
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/">En</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">从 Wordpress 迁移到 Hugo</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
+            </div>
+          <span class="more-meta"> 约 4470 字 </span>
+          <span class="more-meta"> 预计阅读 9 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#生活本不易-何苦再折腾">生活本不易，何苦再折腾</a>
+<ul>
+<li><a href="#谈一点人生经验">谈一点人生经验</a></li>
+<li><a href="#为什么一定要折腾">为什么一定要折腾</a></li>
+</ul></li>
+<li><a href="#开山凿石-添砖加瓦-终于喜迎乔迁">开山凿石，添砖加瓦，终于喜迎乔迁</a>
+<ul>
+<li><a href="#选平台">选平台</a></li>
+<li><a href="#选主题">选主题</a></li>
+<li><a href="#内容迁移">内容迁移</a></li>
+<li><a href="#多语言">多语言</a></li>
+<li><a href="#部署">部署</a></li>
+</ul></li>
+<li><a href="#装修">装修</a></li>
+<li><a href="#挂牌-上线">挂牌、上线</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    <div class="post-content">
+      
+
+<p>本站正式从之前基于 Wordpress 搭建的 <a href="https://blog.donggan.info">https://blog.donggan.info</a> 搬到基于 Hugo 搭建的 <a href="https://donggan.me">https://donggan.me</a>, 也就是现在的这里。</p>
+
+<p>博客搬家就像真实世界搬家一样折腾。不过当你下定决心彻底搬完之后，看着满意的新家，顿时觉得其中的折腾和付出还是值得的。</p>
+
+<figure>
+    <img src="/img/erda-estremera-1024-unsplash.jpg"/> <figcaption>
+            <h4>Photo by Erda Estremera</h4>
+        </figcaption>
+</figure>
+
+
+<h2 id="生活本不易-何苦再折腾">生活本不易，何苦再折腾</h2>
+
+<h3 id="谈一点人生经验">谈一点人生经验</h3>
+
+<p>我用过的博客平台不算多，但是各种类型基本也都接触过一些。深度搭过网站的有下面这些：</p>
+
+<ul>
+<li><p>Wordpress</p>
+
+<p>老牌博客平台了，基于 PHP 的开源内容管理系统。我用它搭过个人博客包括本站的前身 （<a href="https://blog.donggan.info">https://blog.donggan.info</a> ，没写几篇就断更了）、一个美食博客（<a href="https://pepperpi.com">https://pepperpi.com</a> ，也是断更了），还有几个企业门户网站。
+Wordpress 优点呢就是主题多，插件多，基本上你能想到的想不到的都可以用插件解决。缺点呢就是很臃肿，比较重。基本上做个像样的企业门户网站，没个十几个插件都不好意思叫门户网站。另外，Wordpress 是 PHP + MySQL 的部署方式，也就是说是个动态网站，在部署和运维上还是需要花一些精力和成本的。</p></li>
+
+<li><p>Ghost</p>
+
+<p>一个基于 NodeJS 的有设计感的开源内容管理系统。我用它搭过<em>微服务部落</em> (<a href="http://blog.idevfun.io">http://blog.idevfun.io</a> ，在写本文的时候发现因为欠费一个月销毁了，文章都没了。平复了几天心情后决定改天专门写一下这段血泪史……)，还有 <em>AKI 优选</em> (<a href="https://akischoice.com/">https://akischoice.com/</a> ，哭了，和 blog.idevfun.io 放一个主机上了，也被销毁了)。Ghost 相对 Wordpress 来说交互更简约、现代一些，它的后台内容管理系统是个基于 EmberJS 开发的单页式应用，体验还是可以的。缺点是插件较少，内容编辑工具对中午支持不太友好，需要从别地地方编辑好再粘贴到里面。另外，它也是个动态网站，不过部署起来较为方便，自带的命令行工具基本可以交互式地很方便就搭起一个网站。</p></li>
+
+<li><p>其他静态网站生成工具</p>
+
+<p>用过几个静态网站生成工具，主要使用场景是公司内项目主页和开源项目的主页。包括：</p>
+
+<ul>
+<li>Docusaurus - Facebook 开源的一个文档网站生成工具。使用 ReactJS 作为模版和页面的开发框架。唯一缺点是名字太长不太好记。另外，虽然使用 React，但是只是渲染时的引擎，并不是运行在前端页面的，也就是说最终还是生成一个静态的网站，如果想自己加一些页面动态的逻辑，比如通过 JS 调用接口渲染数据等功能，还是需要使用普通 JS 编写。不过，听闻 Docusaurus 的 v2 的提案已经在讨论中，也许第二个大版本就会像 VuePress 支持在前端渲染 Vue 代码一样支持在 Docusaurus 前端渲染 React 代码了。</li>
+<li>Hugo - 基于 Go 的一个静态网站生成工具。我在开源项目 gRPC Mate 主页 (<a href="https://grpcmate.io/">https://grpcmate.io/</a>) 使用了 Hugo，参考的是 gRPC 项目的官网。当然，本站也是使用 Hugo 生成的，目前使用体验还不错。相比较于 Docusaurus 来说，Hugo 因为使用 Go 做渲染和编译的工具，在本地安装比较简单，只需要安装相应平台的命令行工具即可。而 Docusaurus 就得用 npm 或者 yarn 下载一堆依赖来安装了。</li>
+</ul>
+
+<p>除了这两个静态网站生成工具，我还接触过 Jekyll, Hexo 等静态网站生成工具，都是大同小异，使用 Markdown 文件管理内容，可以安装和定制不同的主题等，只是工具本身的语言不同。</p></li>
+</ul>
+
+<p><strong>静态网站相比动态网站的第一个优势，就是部署简单，节省资源。</strong></p>
+
+<p>你可以在本地编译生成最终网站的静态文件，然后就可以打包部署到目标机器上，目标机器只需要运行一个 NGINX 即可，不需要额外搭建配置一个数据库。甚至，你连目标主机都不需要有，只需要通过 Github Pages, Netlify, Heroku 等服务就可以很方便地免费承载你的静态网站。客观地说，对于技术小白，可能动态网站第一次搭建会很折腾，但以后每次更新文章比较方便。但对于懂一点技术稍微有点 git 操作知识的人来讲，只要搭建起静态网站更新的流程，不管是首次搭建还是更新都是比较方便的。另外，因为最多只需要运行一个 NGINX，不需要 MySQL，你可能搭建动态网站需要一两个 VPS 实例，但是用静态网站可能这个钱就省了。</p>
+
+<p><strong>静态网站的第二个优势，访问速度快，性能更好。</strong></p>
+
+<p>纯静态页面没有和数据库的交互，本身就更快。而且因为是静态页面，你可以使用 CDN 来做图片、JS、CSS 甚至 HTML 页面的缓存。对于终端用户来说，是可以根据接入点就近访问的。</p>
+
+<p><strong>静态网站的第三个优势，不用担心数据备份的问题。</strong></p>
+
+<p>动态网站，比如前面的 Wordpress 和 Ghost ，除了文章的内容和一些配置信息是保存在数据库中，如果不特殊设置图片上传到云端，默认图片是保存在主机文件系统上的。也就是说，备份整个网站的数据，除了要定期 dump 一份数据库，还要把网站目录的静态文件也保存下来。也可以定期把整个主机打镜像快照保存下来，但要迁移一个主机总归还是很麻烦的。</p>
+
+<p>谈起数据备份，我真的是有血泪史，上面提到的两个用 Ghost 搭建的网站，因为 VPS 提供商账号欠费，直接把我的主机销毁了，目前还在找技术支持看能不能把我两个网站找回来。所以如果不想使用动态网站还像我一样直接把网站的数据弄丢，那就一定要定期经常备份数据。</p>
+
+<p>不过，如果使用的是静态网站，就不太用担心数据备份的问题了。因为通常来说，网站的内容文件一般都是用 Git 管理的，可以放在 GitHub 上。不仅可以随时放在本地或者远端，还有所有更改的历史记录。这样一来基本就不用担心数据会丢了，你可以 GitHub 放一份，GitLab 放一份，自己电脑上还有一份。</p>
+
+<h3 id="为什么一定要折腾">为什么一定要折腾</h3>
+
+<p>就本站来说，我为什么要从 Wordpress 迁移到 Hugo 呢？从现实角度，每月要花15美元维护一个 AWS 最小的实例，上面运行两个 WordPress 外加一个 MySQL，花钱不多，但是其实不是很省心。其中遇到的一个问题就是每隔一段时间就内存满然后 MySQL 进程被系统杀掉。可能我对 PHP 还是不很熟悉，也懒得去看怎么调优参数让两个网站外加 MySQL 花尽量少的内存。我仍然是每次重启 <code>php-fpm</code> 来解决，可以一下子就释放很多内存，然后再重启 <code>mysql</code>。理论上可以通过扩容实例来解决，不过我实在是太懒了，可能扩容还要迁移主机，想想就头疼。另外，如果迁移到其他 VPS 厂商，同样规格的实例可以控制到5美元每月。但是想到反正都要迁移，还不如干脆直接迁移到 Hugo 算了，反正总共也没几篇文章。</p>
+
+<p>一方面因为上面总是需要手动维护的原因，另一方面 Wordpress 编辑器的使用体验其实没有那么好，连 Markdown 支持都不怎么样。这也直接影响到我写文章的产出，几年才写了两三篇。印象笔记中 buffer 了几十上百篇可以用来写文章的素材，但是却懒得发表出来。如果迁移到新的平台，也希望能经常写一写。</p>
+
+<p>这才有了本站，和本文。</p>
+
+<p>那么，我为什么要改域名呢？之前的域名 donggan.info 是早些年买的，当时申请了 <code>.info</code> 而没有用 <code>.me</code> 这种更适合个人博客的顶级域名。我现在也不是很理解当时是怎么想的，大概是想 <code>.info</code> 除了发表个人博客，还可以做成一个资讯或是什么类型的技术博客，现在想想就是想太多。所以这次趁着搬家干脆重新申请了新域名 donggan.me 。因为我的博客由于上面数据库老挂的原因经常不能访问，所以也没什么 SEO，换了就换了，当成从零开始，也很好。有那么两三篇早些年写的不成熟的文章，也可以一并迁了过来。</p>
+
+<h2 id="开山凿石-添砖加瓦-终于喜迎乔迁">开山凿石，添砖加瓦，终于喜迎乔迁</h2>
+
+<p>打定了主意要搬家，那就找个独居的周末开始动手吧，这样的时机对我来说可能一年也就只有那么一两次。</p>
+
+<h3 id="选平台">选平台</h3>
+
+<p>首先我肯定是要自建，所以要找一个静态网站生成的工具，这里我还是继续选择 Hugo，原因上面有详细说明。这里没怎么花时间，Mac 上运行 <code>brew install hugo</code> 即可在本地安装 Hugo，可以体验一下。</p>
+
+<h3 id="选主题">选主题</h3>
+
+<p>选个合适的主题很重要，这里我花了些时间。Hugo 官方有个<a href="https://themes.gohugo.io">主题的列表</a>, 但要选一个功能强大或者热门的不是很方便。所以我搜了几个主题推荐的网站，找了下排名靠前的几个主题，最终选定了 <a href="https://themes.gohugo.io/hugo-theme-even/">Even</a>，简洁大方，比较符合我的口味。Even 应该是从 Hexo 的一个主题移植过来的，作者是个国人，想必对中文支持应该会好一些。另外排名很靠前的另一个主题 Academic 看起来也不错，不过似乎略微复杂一些，本站没有采用，打算后面其他的站点试用一下。</p>
+
+<h3 id="内容迁移">内容迁移</h3>
+
+<p>因为之前博客上发表的文章很少，所以迁移比较简单，连导出工具都不用，可以用复制粘贴大法手动搞定。这样也能确保图片之类的相对路径引用是没问题的。</p>
+
+<h3 id="多语言">多语言</h3>
+
+<p>之前的博客文章几篇都是先有英文，再翻译成中文发出来的，使用了 WordPress 的多语言支持插件。迁移后，由于 Hugo 和我选用的这个主题对于文章内容多语言和站点本身 i18n 都有原生支持，对于中英文都有的文章就方便多了。主题的菜单栏对多语言的支持略微需要调整一下，不过最终的效果还是不错的。</p>
+
+<h3 id="部署">部署</h3>
+
+<p>本站使用 GitHub Pages 搭建，也就是说不需要额外花每个月的 VPS 机器成本，也省了每次更新要自己部署到机器上的麻烦。</p>
+
+<h2 id="装修">装修</h2>
+
+<p>对于新家来说，一套完整的自动化流程将会减少发布的难度，进一步降低写作的阻碍和成本。</p>
+
+<p>目前已经实现的功能，简要描述就是通过 git 提交一篇文章，运行一个部署脚本构建静态文件并提交到 GitHub`。以下以本博客为例，介绍一下搭建的大概流程：</p>
+
+<ol>
+<li>创建一个名为 <code>donggan.me</code> 的仓库，即博客主仓库，存放 markdown 源文件和模版文件等静态源文件。这个仓库可以是私有仓库，也可以叫其他任何名字。这个仓库将是存放博客所有数据的地方。为了避免搜索引擎爬取 GitHub 源文件而非优先显示本站的内容，我暂时把这个仓库设为私有仓库。</li>
+<li>Fork 了主题的仓库到自己 GitHub 名下。Hugo 本身对主题的扩展机制比较灵活，需要改主题的某个文件其实可以在项目目录里直接覆盖，渲染模版的时候优先级顺序会比主题目录的高，不过我还是 fork 了我所选主题的项目到自己名下。这样不是为了定制自己的版本，而是可以控制什么时候更新上游更新。</li>
+
+<li><p>添加 fork 项目成为自己博客主仓库的一个 submodule。这样在本地可以在一个视图中操作主仓库工程和主题工程。将 submodule 放在 themes 目录下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ git submodule add git@github.com:gdong42/hugo-theme-even.git themes/even
+$ git submodule update --init --recursive</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>我们可以在项目里按照 Hugo 的方式添加一些 Markdown 文件了，运行 <code>hugo server -D</code> 后可以通过浏览器预览包括草稿的所有文章渲染后的样子。满意后就可以随时提交内容并推到 GitHub 上保存。记得提交前删掉渲染的目标静态文件目录：<code>rm -rf public</code></p></li>
+</ol>
+
+<p>上面的步骤只是将源文件存放到 git 中。我们还需要将渲染后的静态页面也放到 GitHub 中，正式发布这些文章使大家都能访问到。步骤如下：</p>
+
+<ol>
+<li>在自己 GitHub 名下创建一个 <code>gdong42.github.io</code> 仓库，命名符合 GitHub Pages 的规则，因此这个仓库中存放的静态文件会呈现在地址 <code>gdong42.github.io</code> 这个地址中。</li>
+
+<li><p>回到我们的博客主仓库 <code>donggan.me</code> ，添加上述仓库为 submodule：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ git submodule add -b master git@github.com:gdong42/gdong42.github.io.git public</code></pre></td></tr></table>
+</div>
+</div>
+<p>现在，生成的目录 <code>public</code> 就会指向我们刚创建的 <code>gdong42.github.io</code> 这个仓库。</p></li>
+
+<li><p>在博客主仓库 <code>donggan.me</code> 根目录中添加文件 <code>deploy.sh</code> 并给文件添加可执行权限, 内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
+</span><span class="cp"></span>    
+<span class="c1"># If a command fails then the deploy stops</span>
+<span class="nb">set</span> -e
+    
+<span class="nb">printf</span> <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&#34;</span>
+    
+<span class="c1"># Build the project.</span>
+hugo <span class="c1"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>
+    
+<span class="c1"># Go To Public folder</span>
+<span class="nb">cd</span> public
+    
+<span class="c1"># Add changes to git.</span>
+git add .
+    
+<span class="c1"># Commit changes.</span>
+<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;Rebuilding site </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
+<span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>
+<span class="k">fi</span>
+git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+    
+<span class="c1"># Push source and build repos.</span>
+git push origin master</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+
+<p>至此，整个就已经搭建完毕。日常更新文章的操作步骤会像这样：</p>
+
+<ol>
+<li>在 <code>donggan.me</code> 仓库中撰写添加文章</li>
+
+<li><p>可以在本地运行 <code>hugo server -D</code> 实时预览效果，觉得完成且适合发表后，运行下面的命令一键发布：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">$ . ./deploy.sh</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>发布确认没问题后，可以提交本地 <code>donggan.me</code> 仓库的改动并推送保存。</p></li>
+</ol>
+
+<p>此时，你应该可以通过 <a href="https://gdong42.github.io/">https://gdong42.github.io/</a> 来访问上面部署后的网站。
+那么下一部分，介绍下如何配置自定义域名。</p>
+
+<h2 id="挂牌-上线">挂牌、上线</h2>
+
+<p>首先在 <code>gdong42.github.io</code> 这个仓库的设置页面里，设置自定义域名为 <code>donggan.me</code>。然后在域名服务商处设置解析，GitHub Pages 支持使用 ALIAS 或 ANAME 的 DNS 解析类型，理论上可以直接指向 <code>gdong42.github.io</code> 这个域名即可。不过我是在 GoDaddy 注册的域名，似乎不支持这两种类型的记录，所以需要使用 A 记录，指向 GitHub 的几个 IP 即可。</p>
+
+<p>设置好域名过一段时间后 GitHub 会自动为自定义域名申请 Let&rsquo;s Encrypt 的 HTTPS 域名证书并部署好，所以证书我们也不用担心了。</p>
+
+<p>听起来复杂，但其实整个过程还是很简单的，下面这张图可以简单总结一下。</p>
+
+<figure>
+    <img src="/img/blog-migration.png"/> <figcaption>
+            <h4>How Everything Works Behind https://donggan.me/</h4>
+        </figcaption>
+</figure>
+
+
+<p>搞定，一切完美，喝个咖啡放松一下吧。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">董干</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-09-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/wordpress/">wordpress</a>
+          <a href="/tags/hugo/">hugo</a>
+          <a href="/tags/blog/">blog</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/install-shadowsocks-on-ubuntu-16-04/">
+            <span class="next-text nav-default">在 Ubuntu 16.04 上安装 shadowsocks server</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'donggan-me';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/__gdong__" class="iconfont icon-twitter" title="twitter"></a>
+  <a href="https://donggan.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2014 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">董干</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77549857-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

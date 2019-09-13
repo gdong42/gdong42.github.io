@@ -6,7 +6,7 @@
     <description>Recent content on Gan&#39;s Blog - Dumps to digest.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 14 Jan 2019 23:32:34 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Sep 2019 19:22:24 +0800</lastBuildDate>
     
 	<atom:link href="https://donggan.me/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://donggan.me/about/</guid>
       <description>Comming soon..</description>
+    </item>
+    
+    <item>
+      <title>从 Wordpress 迁移到 Hugo</title>
+      <link>https://donggan.me/post/migrate-from-wp-to-hugo/</link>
+      <pubDate>Sun, 08 Sep 2019 19:22:24 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/migrate-from-wp-to-hugo/</guid>
+      <description>博客搬家就像真的搬家一样折腾。</description>
     </item>
     
     <item>

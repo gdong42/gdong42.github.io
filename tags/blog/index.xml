@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/tags/blog/</link>
+    <description>Recent content in blog on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 08 Sep 2019 19:22:24 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>从 Wordpress 迁移到 Hugo</title>
+      <link>https://donggan.me/post/migrate-from-wp-to-hugo/</link>
+      <pubDate>Sun, 08 Sep 2019 19:22:24 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/migrate-from-wp-to-hugo/</guid>
+      <description>博客搬家就像真的搬家一样折腾。</description>
+    </item>
+    
+  </channel>
+</rss>
