@@ -44,14 +44,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://donggan.me/post/migrate-from-wp-to-hugo/" />
 <meta property="article:published_time" content="2019-09-08T19:22:24+08:00" />
-<meta property="article:modified_time" content="2019-09-08T19:22:24+08:00" />
+<meta property="article:modified_time" content="2019-09-15T16:57:37+08:00" />
 <meta itemprop="name" content="从 Wordpress 迁移到 Hugo">
 <meta itemprop="description" content="博客搬家就像真的搬家一样折腾。">
 
 
 <meta itemprop="datePublished" content="2019-09-08T19:22:24&#43;08:00" />
-<meta itemprop="dateModified" content="2019-09-08T19:22:24&#43;08:00" />
-<meta itemprop="wordCount" content="4470">
+<meta itemprop="dateModified" content="2019-09-15T16:57:37&#43;08:00" />
+<meta itemprop="wordCount" content="4533">
 
 
 
@@ -84,9 +84,9 @@
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
   <ul class="mobile-menu-list">
     <a href="/">
-        <li class="mobile-menu-item"></li>
+        <li class="mobile-menu-item">首页</li>
       </a><a href="/post/">
-        <li class="mobile-menu-item"></li>
+        <li class="mobile-menu-item">归档</li>
       </a><a href="/tags/">
         <li class="mobile-menu-item">标签</li>
       </a><a href="/categories/">
@@ -94,11 +94,10 @@
       </a><a href="/about/">
         <li class="mobile-menu-item">关于</li>
       </a><a href="/en/">
-        <li class="mobile-menu-item"></li>
+        <li class="mobile-menu-item">En</li>
       </a>
   </ul>
 </nav>
-
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
@@ -137,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
             </div>
-          <span class="more-meta"> 约 4470 字 </span>
-          <span class="more-meta"> 预计阅读 9 分钟 </span>
+          <span class="more-meta"> 约 4533 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
         
       </div>
     </header>
@@ -227,17 +226,17 @@ Wordpress 优点呢就是主题多，插件多，基本上你能想到的想不�
 
 <p>谈起数据备份，我真的是有血泪史，上面提到的两个用 Ghost 搭建的网站，因为 VPS 提供商账号欠费，直接把我的主机销毁了，目前还在找技术支持看能不能把我两个网站找回来。所以如果不想使用动态网站还像我一样直接把网站的数据弄丢，那就一定要定期经常备份数据。</p>
 
-<p>不过，如果使用的是静态网站，就不太用担心数据备份的问题了。因为通常来说，网站的内容文件一般都是用 Git 管理的，可以放在 GitHub 上。不仅可以随时放在本地或者远端，还有所有更改的历史记录。这样一来基本就不用担心数据会丢了，你可以 GitHub 放一份，GitLab 放一份，自己电脑上还有一份。</p>
+<p>不过，如果使用的是静态网站，就不太用担心数据备份的问题了。因为通常来说，网站的内容文件一般都是由 Git 管理的，可以放在 GitHub 上。这些内容数据不仅可以随时放在本地或者远端，所有更改的历史记录也会保存下来。这样一来就完全不用担心数据会丢了——你可以 GitHub 放一份，GitLab 放一份，自己电脑上还有一份。</p>
 
 <h3 id="为什么一定要折腾">为什么一定要折腾</h3>
 
-<p>就本站来说，我为什么要从 Wordpress 迁移到 Hugo 呢？从现实角度，每月要花15美元维护一个 AWS 最小的实例，上面运行两个 WordPress 外加一个 MySQL，花钱不多，但是其实不是很省心。其中遇到的一个问题就是每隔一段时间就内存满然后 MySQL 进程被系统杀掉。可能我对 PHP 还是不很熟悉，也懒得去看怎么调优参数让两个网站外加 MySQL 花尽量少的内存。我仍然是每次重启 <code>php-fpm</code> 来解决，可以一下子就释放很多内存，然后再重启 <code>mysql</code>。理论上可以通过扩容实例来解决，不过我实在是太懒了，可能扩容还要迁移主机，想想就头疼。另外，如果迁移到其他 VPS 厂商，同样规格的实例可以控制到5美元每月。但是想到反正都要迁移，还不如干脆直接迁移到 Hugo 算了，反正总共也没几篇文章。</p>
+<p>就本站来说，我为什么要从 Wordpress 迁移到 Hugo 呢？从现实角度，每月要花15美元维护一个 AWS 最小的实例，上面运行两个 WordPress 外加一个 MySQL，花钱不算多，但是其实不是很省心。其中遇到的一个问题就是每隔一段时间就内存满然后 MySQL 进程被系统杀掉。可能因为我对 PHP 还是不很熟悉，也懒得去看怎么调优参数让两个网站外加 MySQL 花尽量少的内存。我仍然是每次重启 <code>php-fpm</code> 来解决，可以一下子就释放很多内存，然后再重启 <code>mysql</code>。内存不够用的问题理论上可以通过扩容实例来解决，不过我实在是太懒了，可能扩容还要迁移主机，想想就头疼。其实，如果迁移到其他 VPS 厂商，同样规格的实例可以控制到5美元每月。但是想到反正都要迁移，还不如干脆直接迁移到 Hugo 算了，反正总共也没几篇文章。</p>
 
-<p>一方面因为上面总是需要手动维护的原因，另一方面 Wordpress 编辑器的使用体验其实没有那么好，连 Markdown 支持都不怎么样。这也直接影响到我写文章的产出，几年才写了两三篇。印象笔记中 buffer 了几十上百篇可以用来写文章的素材，但是却懒得发表出来。如果迁移到新的平台，也希望能经常写一写。</p>
+<p>一方面因为上面说的总是需要手动维护，另一方面 Wordpress 编辑器的使用体验其实没有那么好，连 Markdown 支持都不怎么样。这也直接影响到我写文章的产出，几年才写了两三篇（？？？WP：这个锅我不背）。印象笔记中 buffer 了几十上百篇可以用来写文章的素材，但是却懒得发表出来。如果迁移到新的平台，也希望能经常写一写。</p>
 
 <p>这才有了本站，和本文。</p>
 
-<p>那么，我为什么要改域名呢？之前的域名 donggan.info 是早些年买的，当时申请了 <code>.info</code> 而没有用 <code>.me</code> 这种更适合个人博客的顶级域名。我现在也不是很理解当时是怎么想的，大概是想 <code>.info</code> 除了发表个人博客，还可以做成一个资讯或是什么类型的技术博客，现在想想就是想太多。所以这次趁着搬家干脆重新申请了新域名 donggan.me 。因为我的博客由于上面数据库老挂的原因经常不能访问，所以也没什么 SEO，换了就换了，当成从零开始，也很好。有那么两三篇早些年写的不成熟的文章，也可以一并迁了过来。</p>
+<p>那么，我为什么要改域名呢？之前的域名 donggan.info 是早些年买的，当时申请了 <code>.info</code> 而没有用 <code>.me</code> 这种更适合个人博客的顶级域名。我现在也不是很理解当时是怎么想的，大概是想 <code>.info</code> 除了发表个人博客，还可以做成一个资讯或是什么类型的技术博客，现在想想就是想太多。所以这次趁着搬家干脆重新申请了新域名 donggan.me，专门用来做个人博客。因为原来的博客由于上面说的数据库老挂的原因经常数天不能访问，所以也没什么 SEO，换了就换了，当成从零开始，也很好。有那么两三篇早些年写的不成熟的文章，也可以一并迁了过来。</p>
 
 <h2 id="开山凿石-添砖加瓦-终于喜迎乔迁">开山凿石，添砖加瓦，终于喜迎乔迁</h2>
 
@@ -257,7 +256,7 @@ Wordpress 优点呢就是主题多，插件多，基本上你能想到的想不�
 
 <h3 id="多语言">多语言</h3>
 
-<p>之前的博客文章几篇都是先有英文，再翻译成中文发出来的，使用了 WordPress 的多语言支持插件。迁移后，由于 Hugo 和我选用的这个主题对于文章内容多语言和站点本身 i18n 都有原生支持，对于中英文都有的文章就方便多了。主题的菜单栏对多语言的支持略微需要调整一下，不过最终的效果还是不错的。</p>
+<p>之前的博客文章几篇都是先有英文，再翻译成中文发出来的，使用了 WordPress 的多语言支持插件。迁移后，由于 Hugo 和我选用的这个主题对于文章内容多语言和站点本身 i18n 都有原生支持，对于中英文都有的文章就方便多了。主题的菜单栏对多语言的支持需要略微调整一下，不过最终的效果还是不错的。</p>
 
 <h3 id="部署">部署</h3>
 
@@ -267,11 +266,12 @@ Wordpress 优点呢就是主题多，插件多，基本上你能想到的想不�
 
 <p>对于新家来说，一套完整的自动化流程将会减少发布的难度，进一步降低写作的阻碍和成本。</p>
 
-<p>目前已经实现的功能，简要描述就是通过 git 提交一篇文章，运行一个部署脚本构建静态文件并提交到 GitHub`。以下以本博客为例，介绍一下搭建的大概流程：</p>
+<p>目前的最终效果，简要描述就是通过 git 提交一篇文章，运行一个部署脚本构建静态文件并提交到 GitHub。以下以本博客为例，介绍一下搭建的大概流程：</p>
 
 <ol>
-<li>创建一个名为 <code>donggan.me</code> 的仓库，即博客主仓库，存放 markdown 源文件和模版文件等静态源文件。这个仓库可以是私有仓库，也可以叫其他任何名字。这个仓库将是存放博客所有数据的地方。为了避免搜索引擎爬取 GitHub 源文件而非优先显示本站的内容，我暂时把这个仓库设为私有仓库。</li>
-<li>Fork 了主题的仓库到自己 GitHub 名下。Hugo 本身对主题的扩展机制比较灵活，需要改主题的某个文件其实可以在项目目录里直接覆盖，渲染模版的时候优先级顺序会比主题目录的高，不过我还是 fork 了我所选主题的项目到自己名下。这样不是为了定制自己的版本，而是可以控制什么时候更新上游更新。</li>
+<li><p>创建一个名为 <code>donggan.me</code> 的仓库，即博客主仓库，存放 markdown 源文件和模版文件等静态源文件。这个仓库可以是私有仓库，也可以叫其他任何名字。这个仓库将是存放博客所有数据的地方。为了避免搜索引擎爬取 GitHub 源文件而将搜索结果排在本站的前面，我暂时把这个仓库设成了私有仓库。</p></li>
+
+<li><p>Fork 了主题 Even 的仓库到自己 GitHub 名下。Hugo 本身对主题的扩展机制比较灵活，需要改主题的某个文件其实可以在项目目录里直接覆盖，渲染模版的时候优先级顺序会比主题目录的高，不过我还是 fork 了我所选主题的项目到自己名下。这样不是为了定制自己的版本，而是为了可以控制什么时候集成上游的更新。</p></li>
 
 <li><p>添加 fork 项目成为自己博客主仓库的一个 submodule。这样在本地可以在一个视图中操作主仓库工程和主题工程。将 submodule 放在 themes 目录下。</p>
 <div class="highlight"><div class="chroma">
@@ -411,7 +411,7 @@ git push origin master</code></pre></td></tr></table>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2019-09-08
+        2019-09-15
         
     </span>
   </p>
