@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>简单工厂模式 on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/tags/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 简单工厂模式 on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 16 Dec 2018 00:15:26 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/tags/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>工厂模式简介（一）：简单工厂模式</title>
+      <link>https://donggan.me/post/factory-pattern-1-simple-factory-pattern/</link>
+      <pubDate>Sun, 16 Dec 2018 00:15:26 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/factory-pattern-1-simple-factory-pattern/</guid>
+      <description>现今在互联网圈，设计模式并不是那么容易被提起了，这恐怕和互联网的快速迭代和微服务的流行有一些关系。设计模式在函数式编程火热的时候还一度成为了</description>
+    </item>
+    
+  </channel>
+</rss>

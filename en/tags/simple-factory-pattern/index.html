@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>标签 - Gan&#39;s Blog - Dumps to digest.</title>
+  <title>Simple Factory Pattern · Gan&#39;s Blog - Dumps to digest.</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -26,9 +26,9 @@
 <meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
 
 
-<link rel="canonical" href="https://donggan.me/tags/" />
-  <link href="https://donggan.me/tags/index.xml" rel="alternate" type="application/rss+xml" title="Gan&#39;s Blog - Dumps to digest." />
-  <link href="https://donggan.me/tags/index.xml" rel="feed" type="application/rss+xml" title="Gan&#39;s Blog - Dumps to digest." />
+<link rel="canonical" href="https://donggan.me/en/tags/simple-factory-pattern/" />
+  <link href="https://donggan.me/en/tags/simple-factory-pattern/index.xml" rel="alternate" type="application/rss+xml" title="Gan&#39;s Blog - Dumps to digest." />
+  <link href="https://donggan.me/en/tags/simple-factory-pattern/index.xml" rel="feed" type="application/rss+xml" title="Gan&#39;s Blog - Dumps to digest." />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,17 +41,17 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<meta property="og:title" content="Tags" />
+<meta property="og:title" content="Simple Factory Pattern" />
 <meta property="og:description" content="Gan&#39;s Blog - Dumps to digest." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://donggan.me/tags/" />
+<meta property="og:url" content="https://donggan.me/en/tags/simple-factory-pattern/" />
 
-<meta property="og:updated_time" content="2019-09-08T19:22:24+08:00" />
-<meta itemprop="name" content="Tags">
+<meta property="og:updated_time" content="2018-12-16T00:15:26+08:00" />
+<meta itemprop="name" content="Simple Factory Pattern">
 <meta itemprop="description" content="Gan&#39;s Blog - Dumps to digest.">
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
+<meta name="twitter:title" content="Simple Factory Pattern"/>
 <meta name="twitter:description" content="Gan&#39;s Blog - Dumps to digest."/>
 
 <!--[if lte IE 9]>
@@ -67,7 +67,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+    <a href="/en/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -77,41 +77,41 @@
 </div>
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
   <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">首页</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">归档</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">标签</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">分类</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">关于</li>
-      </a><a href="/en/">
-        <li class="mobile-menu-item">En</li>
+    <a href="/en/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/en/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/en/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/en/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/en/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/">
+        <li class="mobile-menu-item">中文</li>
       </a>
   </ul>
 </nav>
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+  <a href="/en/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
 </div>
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
     <li class="menu-item">
-        <a class="menu-item-link" href="/">首页</a>
+        <a class="menu-item-link" href="/en/">Home</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">归档</a>
+        <a class="menu-item-link" href="/en/post/">Archives</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">标签</a>
+        <a class="menu-item-link" href="/en/tags/">Tags</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">分类</a>
+        <a class="menu-item-link" href="/en/categories/">Categories</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">关于</a>
+        <a class="menu-item-link" href="/en/about/">About</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/en/">En</a>
+        <a class="menu-item-link" href="/">中文</a>
       </li>
   </ul>
 </nav>
@@ -120,77 +120,27 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <div class="terms">
-      <div class="terms-title">
-        共计 13 个标签
+          <section id="archive" class="archive">
+  <div class="archive-title tag">
+        <h2 class="archive-name">Simple Factory Pattern</h2>
       </div>
-      <div class="terms-tags">
-          <a class="terms-link" href="/tags/java/">
-            java
-            <span class="terms-count">2</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/blog/">
-            blog
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/golang/">
-            golang
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/hugo/">
-            hugo
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/shadowsocks/">
-            shadowsocks
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/ubuntu/">
-            ubuntu
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/ubuntu-16.04/">
-            ubuntu-16.04
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/wordpress/">
-            wordpress
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/%E5%90%90%E6%A7%BD/">
-            吐槽
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-            简单工厂模式
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/">
-            线程安全
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-            设计模式
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-            面向对象
-            <span class="terms-count">1</span>
-          </a>
-        </div>
+
+  <div class="archive-post">
+      <span class="archive-post-time">
+        2018-12-16
+      </span>
+      <span class="archive-post-title">
+        <a href="/en/post/factory-pattern-1-simple-factory-pattern/" class="archive-post-link">
+          Introduction to Factory Pattern (1): Simple Factory Pattern
+        </a>
+      </span>
     </div>
+</section>
+
+<nav class="pagination">
+  
+  
+</nav>
         </div>
         
 
@@ -200,16 +150,16 @@
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="https://twitter.com/__gdong__" class="iconfont icon-twitter" title="twitter"></a>
-  <a href="https://donggan.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://donggan.me/en/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
   <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    主题 - 
+    Theme - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 

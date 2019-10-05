@@ -46,19 +46,19 @@ Of course, design patterns might have been thrown away as the essence of Object-
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/" />
 <meta property="article:published_time" content="2018-12-16T00:15:26+08:00" />
-<meta property="article:modified_time" content="2018-12-16T00:15:26+08:00" />
+<meta property="article:modified_time" content="2019-10-06T00:12:23+08:00" />
 <meta itemprop="name" content="Introduction to Factory Pattern (1): Simple Factory Pattern">
 <meta itemprop="description" content="Nowadays, design patterns are not that popular to talk about. This could be related to the rapid iteration of web services, and the popularity of Micro Services. Design patterns were once considered useless dogma, thus as an anti-pattern, during the hype of Function Programming.
 Of course, design patterns might have been thrown away as the essence of Object-Oriented Programming, because Functional Programming was preferred to OOP and was a hype during the time.">
 
 
 <meta itemprop="datePublished" content="2018-12-16T00:15:26&#43;08:00" />
-<meta itemprop="dateModified" content="2018-12-16T00:15:26&#43;08:00" />
-<meta itemprop="wordCount" content="870">
+<meta itemprop="dateModified" content="2019-10-06T00:12:23&#43;08:00" />
+<meta itemprop="wordCount" content="1902">
 
 
 
-<meta itemprop="keywords" content="design patterns,OOP,Java," />
+<meta itemprop="keywords" content="design patterns,OOP,Java,Simple Factory Pattern," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Introduction to Factory Pattern (1): Simple Factory Pattern"/>
 <meta name="twitter:description" content="Nowadays, design patterns are not that popular to talk about. This could be related to the rapid iteration of web services, and the popularity of Micro Services. Design patterns were once considered useless dogma, thus as an anti-pattern, during the hype of Function Programming.
@@ -140,8 +140,8 @@ Of course, design patterns might have been thrown away as the essence of Object-
         <div class="post-category">
             <a href="/en/categories/how-to/"> how to </a>
             </div>
-          <span class="more-meta"> 870 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 1902 words </span>
+          <span class="more-meta"> 9 mins read </span>
         
       </div>
     </header>
@@ -156,6 +156,16 @@ Of course, design patterns might have been thrown away as the essence of Object-
 <li><a href="#introduction">Introduction</a>
 <ul>
 <li><a href="#simple-factory-pattern">Simple Factory Pattern</a></li>
+<li><a href="#pros-and-cons">Pros and Cons</a></li>
+</ul></li>
+<li><a href="#a-step-further">A Step Further</a>
+<ul>
+<li><a href="#class-registration">Class Registration</a>
+<ul>
+<li><a href="#class-registration-with-reflection">Class Registration, with reflection</a></li>
+<li><a href="#class-registration-without-reflection">Class Registration, without reflection</a></li>
+</ul></li>
+<li><a href="#factory-method-pattern">Factory Method Pattern</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -167,7 +177,7 @@ Of course, design patterns might have been thrown away as the essence of Object-
   <ul>
     
     <li>
-      <a href="https://donggan.me/post/factory-pattern-1-simple-factory-pattern/">[中文] 工厂模式简介（一）：简单工厂模式 (1531 words)</a>
+      <a href="https://donggan.me/post/factory-pattern-1-simple-factory-pattern/">[中文] 工厂模式简介（一）：简单工厂模式 (3162 words)</a>
     </li>
     
   </ul>
@@ -276,13 +286,368 @@ Of course, design patterns might have been thrown away as the essence of Object-
 </div>
 <p>See complete code example at this github repo: <a href="https://github.com/gdong42/factory-pattern">https://github.com/gdong42/factory-pattern</a></p>
 
+<h3 id="pros-and-cons">Pros and Cons</h3>
+
 <p>What’s the benefit of this pattern? In this pattern, the caller side does not need to know the exact type implementation and its creation details, it only provides the required type name information. So this pattern reduces the complexity of the client, and decouples the creation logic of various implementation from invocation logic to some extent.</p>
 
 <p>What about the cons? Let’s think about it in real world. There are few such factories. Because this magical factory needs to know how to create every product, which is almost impossible. OOP reflects the real world, therefore it is not reasonable to have a super magic factory that can create all type of products as well in the software world. In other words, each time when we want to add a new car type, we need to update <code>createCar()</code>. This should better be avoided.</p>
 
 <p>Another problem is that <code>SimpleCarFactory</code> class has to depend on all car types, due to the truth that it contains all creation invocation logic in one giant factory. This leads to the client code coupling all product types,  which might never be called by the client, and thus should be optional instead of mandatory dependencies. What we expect is that when we need some kind of product, we use a factory to create it, only with required dependency that has the underlying implementation module.</p>
 
-<p>How to improve this pattern to solve above problems? We will discuss this in the next installment of this topic.</p>
+<h2 id="a-step-further">A Step Further</h2>
+
+<p>Let&rsquo;s take a step further and see how to improve this pattern to solve above problems.</p>
+
+<p>There are two ways that might be useful to avoid the drawbacks mentioned above.</p>
+
+<ol>
+<li><p>Class Registration - maintain a mapping of the actual type and the name prameter of the type. This can be done with two flavors:</p>
+
+<ul>
+<li>with reflection</li>
+<li>without reflection</li>
+</ul></li>
+
+<li><p>Factory Method Pattern - the famous pattern described in the book of GoF&rsquo;s design patterns.</p></li>
+</ol>
+
+<p>Next let&rsquo;s look at them in a bit more details.</p>
+
+<h3 id="class-registration">Class Registration</h3>
+
+<p>The registration can be done by invoking a registering method of the factory. The actual creation of the factory can be done using two ways: with or without reflection. Using this technique, we can maintain the name and type mappings in a HashMap in the factory. To allow registering new mappings, we need to add a method allowing new types to be registered. This way, adding new product types no longer requires any change in the factory class code.</p>
+
+<h4 id="class-registration-with-reflection">Class Registration, with reflection</h4>
+
+<p>For actual object creating logic, the type associated with the requesting type identifier is looked up from the internal mappings, and then the actual create instance logic is called by invoking the constructor using reflection. This can be demonstrated as followed.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">static</span> <span class="kd">class</span> <span class="nf">CarFactoryWithReflection</span> <span class="p">{</span>
+
+  <span class="kd">private</span> <span class="nf">Map</span><span class="o">&lt;</span><span class="n">CarType</span><span class="p">,</span> <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">Car</span><span class="o">&gt;&gt;</span> <span class="n">registeredCarTypes</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ConcurrentHashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+  <span class="kd">private</span> <span class="nf">static</span> <span class="n">CarFactoryWithReflection</span> <span class="nf">INSTANCE</span><span class="p">;</span>
+
+  <span class="kd">private</span> <span class="nf">CarFactoryWithReflection</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">}</span>
+
+  <span class="kd">public</span> <span class="nf">static</span> <span class="n">CarFactoryWithReflection</span> <span class="nf">instance</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">INSTANCE</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CarFactoryWithReflection</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">INSTANCE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">public</span> <span class="nf">void</span> <span class="n">registerCar</span><span class="p">(</span><span class="n">CarType</span> <span class="nf">type</span><span class="p">,</span> <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">Car</span><span class="o">&gt;</span> <span class="n">carClass</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">registeredCarTypes</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">carClass</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kd">public</span> <span class="nf">Car</span> <span class="n">createCar</span><span class="p">(</span><span class="n">CarType</span> <span class="nf">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;type cannot be null&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">Car</span><span class="o">&gt;</span> <span class="n">carClass</span> <span class="o">=</span> <span class="n">registeredCarTypes</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">type</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">carClass</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">&#34;Car type not registered: &#34;</span> <span class="o">+</span> <span class="n">type</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="n">Constructor</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nf">Car</span><span class="o">&gt;</span> <span class="n">carConstructor</span> <span class="o">=</span> <span class="n">carClass</span>
+          <span class="p">.</span><span class="na">getDeclaredConstructor</span><span class="p">();</span>
+      <span class="k">return</span> <span class="n">carConstructor</span><span class="p">.</span><span class="na">newInstance</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="nf">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span>
+          <span class="s">&#34;Car of type &#34;</span> <span class="o">+</span> <span class="n">type</span> <span class="o">+</span> <span class="s">&#34; cannot be instantiated&#34;</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This approach requires one to register a car type to the factory before calling the <code>createCar</code> method. It can be done by calling the <code>registerCar</code> method explicitly from the client code. For example,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="n">CarFactoryWithReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">()</span>
+          <span class="p">.</span><span class="na">registerCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">BMW</span><span class="p">,</span> <span class="n">BmwCar</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+      <span class="n">CarFactoryWithReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">()</span>
+          <span class="p">.</span><span class="na">registerCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">VOLVO</span><span class="p">,</span> <span class="n">VolvoCar</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+      <span class="n">CarFactoryWithReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">()</span>
+          <span class="p">.</span><span class="na">registerCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">TESLA</span><span class="p">,</span> <span class="n">TeslaCar</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+      <span class="n">Car</span> <span class="nf">car1</span> <span class="o">=</span> <span class="n">CarFactoryWithReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">().</span><span class="na">createCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">BMW</span><span class="p">);</span>
+      <span class="n">car1</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span>
+
+      <span class="n">Car</span> <span class="nf">car2</span> <span class="o">=</span> <span class="n">CarFactoryWithReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">().</span><span class="na">createCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">VOLVO</span><span class="p">);</span>
+      <span class="n">car2</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span>
+
+      <span class="n">Car</span> <span class="nf">car3</span> <span class="o">=</span> <span class="n">CarFactoryWithReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">().</span><span class="na">createCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">TESLA</span><span class="p">);</span>
+      <span class="n">car3</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This reflection implementation has its own drawbacks.</p>
+
+<ul>
+<li>Performance.</li>
+<li>Cannot handle well when product has complex constructor parameters.</li>
+<li>The registering logic seems a burden that the client needs to bear with.</li>
+</ul>
+
+<h4 id="class-registration-without-reflection">Class Registration, without reflection</h4>
+
+<p>If for some reason we cannot use reflection, how to do the registration? We can move the registration to the concrete product class itself. This way, the factory does not require knowledge of the concrete product class. Adding new product type does not require changes to the factory as well.</p>
+
+<p>We first add a new method in the abstract product interface, which is <code>Car</code> in our case.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">interface</span> <span class="n">Car</span> <span class="p">{</span>
+
+  <span class="p">...</span>
+
+  <span class="n">Car</span> <span class="nf">create</span><span class="p">();</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">BmwCar</span> <span class="nf">implements</span> <span class="n">Car</span> <span class="p">{</span>
+
+  <span class="kd">static</span> <span class="p">{</span>
+    <span class="n">CarFactoryWithoutReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">registerCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">BMW</span><span class="p">,</span> <span class="k">new</span> <span class="n">BmwCar</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="p">...</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="nf">Car</span> <span class="n">create</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">BmwCar</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Above we register the <code>Car</code> instance into the Factory registration map. We also implement the <code>create()</code> method to produce new instances of <code>BmwCar</code> when required.</p>
+
+<p>The factory and its usage look like below:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">public</span> <span class="nf">static</span> <span class="kd">class</span> <span class="nf">CarFactoryWithoutReflection</span> <span class="p">{</span>
+
+    <span class="kd">private</span> <span class="nf">Map</span><span class="o">&lt;</span><span class="n">CarType</span><span class="p">,</span> <span class="n">Car</span><span class="o">&gt;</span> <span class="nf">registeredCars</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ConcurrentHashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="kd">private</span> <span class="nf">static</span> <span class="n">CarFactoryWithoutReflection</span> <span class="nf">INSTANCE</span><span class="p">;</span>
+
+    <span class="kd">private</span> <span class="nf">CarFactoryWithoutReflection</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="nf">static</span> <span class="n">CarFactoryWithoutReflection</span> <span class="nf">instance</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">INSTANCE</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CarFactoryWithoutReflection</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="n">INSTANCE</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="nf">void</span> <span class="n">registerCar</span><span class="p">(</span><span class="n">CarType</span> <span class="nf">type</span><span class="p">,</span> <span class="n">Car</span> <span class="nf">car</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="na">registeredCars</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">car</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="nf">Car</span> <span class="n">createCar</span><span class="p">(</span><span class="n">CarType</span> <span class="nf">type</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;type cannot be null&#34;</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="n">Car</span> <span class="nf">car</span> <span class="o">=</span> <span class="n">registeredCars</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">type</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">car</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">&#34;Car type not registered: &#34;</span> <span class="o">+</span> <span class="n">type</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="n">car</span><span class="p">.</span><span class="na">create</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// make sure car type is registered to the factory before creating cars
+</span><span class="c1"></span>    <span class="kd">static</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&#34;me.donggan.patterns.factory.simple.model.BmwCar&#34;</span><span class="p">);</span>
+        <span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&#34;me.donggan.patterns.factory.simple.model.VolvoCar&#34;</span><span class="p">);</span>
+        <span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&#34;me.donggan.patterns.factory.simple.model.TeslaCar&#34;</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">ClassNotFoundException</span> <span class="nf">cnfe</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cnfe</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="n">Car</span> <span class="nf">car1</span> <span class="o">=</span> <span class="n">CarFactoryWithoutReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">().</span><span class="na">createCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">BMW</span><span class="p">);</span>
+      <span class="n">car1</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span>
+
+      <span class="n">Car</span> <span class="nf">car2</span> <span class="o">=</span> <span class="n">CarFactoryWithoutReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">().</span><span class="na">createCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">VOLVO</span><span class="p">);</span>
+      <span class="n">car2</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span>
+
+      <span class="n">Car</span> <span class="nf">car3</span> <span class="o">=</span> <span class="n">CarFactoryWithoutReflection</span><span class="p">.</span><span class="na">instance</span><span class="p">().</span><span class="na">createCar</span><span class="p">(</span><span class="n">CarType</span><span class="p">.</span><span class="na">TESLA</span><span class="p">);</span>
+      <span class="n">car3</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This non-reflection implementation has its own drawbacks as well.</p>
+
+<ul>
+<li>The client code need to call <code>Class.forName()</code> explicitly in order to make sure the registration logic is invoked, which is not convenient.</li>
+<li>The concrete product class requires to know the presence of the Factory, and needs to call its register logic.</li>
+</ul>
+
+<p>In the real world, the registration part is usually presented by some kind of  framework, thus above drawbacks can be mitigated.</p>
+
+<h3 id="factory-method-pattern">Factory Method Pattern</h3>
+
+<p>If we take a second thought on above non-reflection class registration, it has a <code>create()</code> method in the <code>Car</code> interface. This is an abstrace method that is used to encapsulate the creation logic to the concrete product itself. It looks more like what a factory does.</p>
+
+<p>Besides, the example registers a <code>Car</code> instance in the static code, which is solely used to be called with the <code>create()</code> method to create other <code>Car</code> instances. See? the design is a bit awkward.</p>
+
+<p>If we make the factory specific to each concrete car types, maybe we can use <code>CarFactory</code> type and <code>BmwCarFactory</code>, <code>TeslaCarFactory</code> and <code>VolvoCarFactory</code> subtypes to <em>create</em> concrete car types. This way some awkwardness above can be avoided. In fact, this leads us to the <strong>Factory Method Pattern</strong>.</p>
+
+<p>In <a href="/en/post/factory-pattern-2-factory-method">next installment of this article</a>, I will talk about <em>Factory Method Pattern</em>.</p>
 
     </div>
 
@@ -294,7 +659,7 @@ Of course, design patterns might have been thrown away as the essence of Object-
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2018-12-16
+        2019-10-06
         
     </span>
   </p>
@@ -306,6 +671,7 @@ Of course, design patterns might have been thrown away as the essence of Object-
           <a href="/en/tags/design-patterns/">design patterns</a>
           <a href="/en/tags/oop/">OOP</a>
           <a href="/en/tags/java/">Java</a>
+          <a href="/en/tags/simple-factory-pattern/">Simple Factory Pattern</a>
           </div>
       <nav class="post-nav">
         

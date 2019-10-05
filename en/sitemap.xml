@@ -10,63 +10,70 @@
   
   <url>
     <loc>https://donggan.me/en/categories/</loc>
-    <lastmod>2019-09-01T21:37:00+08:00</lastmod>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/tags/design-patterns/</loc>
-    <lastmod>2018-12-16T00:15:26+08:00</lastmod>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/</loc>
-    <lastmod>2019-09-01T21:37:00+08:00</lastmod>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/categories/how-to/</loc>
-    <lastmod>2018-12-16T00:15:26+08:00</lastmod>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/</loc>
-    <lastmod>2018-12-16T00:15:26+08:00</lastmod>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/tags/java/</loc>
-    <lastmod>2019-09-01T21:37:00+08:00</lastmod>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/tags/oop/</loc>
-    <lastmod>2018-12-16T00:15:26+08:00</lastmod>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/post/</loc>
-    <lastmod>2019-09-01T21:37:00+08:00</lastmod>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/en/tags/simple-factory-pattern/</loc>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/tags/</loc>
-    <lastmod>2019-09-01T21:37:00+08:00</lastmod>
+    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -17,14 +17,14 @@
   
   <url>
     <loc>https://donggan.me/categories/</loc>
-    <lastmod>2019-09-15T16:57:37+08:00</lastmod>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/</loc>
-    <lastmod>2019-09-15T16:57:37+08:00</lastmod>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -38,14 +38,14 @@
   
   <url>
     <loc>https://donggan.me/post/</loc>
-    <lastmod>2019-09-15T16:57:37+08:00</lastmod>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/tags/</loc>
-    <lastmod>2019-09-15T16:57:37+08:00</lastmod>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -66,7 +66,7 @@
   
   <url>
     <loc>https://donggan.me/categories/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2019-09-15T16:57:37+08:00</lastmod>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -101,28 +101,35 @@
   
   <url>
     <loc>https://donggan.me/tags/java/</loc>
-    <lastmod>2019-09-01T21:37:00+08:00</lastmod>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/post/factory-pattern-1-simple-factory-pattern/</loc>
-    <lastmod>2018-12-16T00:15:26+08:00</lastmod>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2018-12-16T00:15:26+08:00</lastmod>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
-    <lastmod>2018-12-16T00:15:26+08:00</lastmod>
+    <lastmod>2019-10-06T01:01:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
