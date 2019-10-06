@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Introduction to Factory Pattern (2): Factory Method - Gan&#39;s Blog - Dumps to digest.</title>
+  <title>工厂模式简介（二）：工厂方法模式 - Gan&#39;s Blog - Dumps to digest.</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Gan Dong" /><meta name="description" content="In my last article about Factory Pattern, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types. Although class registration techniques can be used to eliminate the couplings in some extent, they still have some major drawbacks that prevent them to be used extensively." /><meta name="keywords" content="Gan Dong, 董干, donggan, donggan.me" />
+<meta name="author" content="董干" /><meta name="description" content="我在上一篇关于工厂模式的文章中介绍了一种简单、直接的方式，可以用来封装创建的逻辑而不暴露过多细节。但一个问题是每当我们添加新的产品品类的时候" /><meta name="keywords" content="Gan Dong, 董干, donggan, donggan.me" />
 
 
 
@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
 
 
-<link rel="canonical" href="https://donggan.me/en/post/factory-pattern-2-factory-method/" />
+<link rel="canonical" href="https://donggan.me/post/factory-pattern-2-factory-method/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,26 +39,26 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<meta property="og:title" content="Introduction to Factory Pattern (2): Factory Method" />
-<meta property="og:description" content="In my last article about Factory Pattern, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types. Although class registration techniques can be used to eliminate the couplings in some extent, they still have some major drawbacks that prevent them to be used extensively." />
+<meta property="og:title" content="工厂模式简介（二）：工厂方法模式" />
+<meta property="og:description" content="我在上一篇关于工厂模式的文章中介绍了一种简单、直接的方式，可以用来封装创建的逻辑而不暴露过多细节。但一个问题是每当我们添加新的产品品类的时候" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://donggan.me/en/post/factory-pattern-2-factory-method/" />
+<meta property="og:url" content="https://donggan.me/post/factory-pattern-2-factory-method/" />
 <meta property="article:published_time" content="2019-09-02T21:28:38+08:00" />
 <meta property="article:modified_time" content="2019-10-06T14:40:38+08:00" />
-<meta itemprop="name" content="Introduction to Factory Pattern (2): Factory Method">
-<meta itemprop="description" content="In my last article about Factory Pattern, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types. Although class registration techniques can be used to eliminate the couplings in some extent, they still have some major drawbacks that prevent them to be used extensively.">
+<meta itemprop="name" content="工厂模式简介（二）：工厂方法模式">
+<meta itemprop="description" content="我在上一篇关于工厂模式的文章中介绍了一种简单、直接的方式，可以用来封装创建的逻辑而不暴露过多细节。但一个问题是每当我们添加新的产品品类的时候">
 
 
 <meta itemprop="datePublished" content="2019-09-02T21:28:38&#43;08:00" />
 <meta itemprop="dateModified" content="2019-10-06T14:40:38&#43;08:00" />
-<meta itemprop="wordCount" content="1048">
+<meta itemprop="wordCount" content="1964">
 
 
 
-<meta itemprop="keywords" content="design patterns,OOP,Java,Factory Method," />
+<meta itemprop="keywords" content="设计模式,面向对象,Java,工厂方法模式," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Introduction to Factory Pattern (2): Factory Method"/>
-<meta name="twitter:description" content="In my last article about Factory Pattern, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types. Although class registration techniques can be used to eliminate the couplings in some extent, they still have some major drawbacks that prevent them to be used extensively."/>
+<meta name="twitter:title" content="工厂模式简介（二）：工厂方法模式"/>
+<meta name="twitter:description" content="我在上一篇关于工厂模式的文章中介绍了一种简单、直接的方式，可以用来封装创建的逻辑而不暴露过多细节。但一个问题是每当我们添加新的产品品类的时候"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -73,7 +73,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/en/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+    <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -83,41 +83,41 @@
 </div>
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
   <ul class="mobile-menu-list">
-    <a href="/en/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/en/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/en/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/en/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a><a href="/en/about/">
-        <li class="mobile-menu-item">About</li>
-      </a><a href="/">
-        <li class="mobile-menu-item">中文</li>
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/en/">
+        <li class="mobile-menu-item">En</li>
       </a>
   </ul>
 </nav>
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/en/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+  <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
 </div>
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
     <li class="menu-item">
-        <a class="menu-item-link" href="/en/">Home</a>
+        <a class="menu-item-link" href="/">首页</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/en/post/">Archives</a>
+        <a class="menu-item-link" href="/post/">归档</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/en/tags/">Tags</a>
+        <a class="menu-item-link" href="/tags/">标签</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/en/categories/">Categories</a>
+        <a class="menu-item-link" href="/categories/">分类</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/en/about/">About</a>
+        <a class="menu-item-link" href="/about/">关于</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/">中文</a>
+        <a class="menu-item-link" href="/en/">En</a>
       </li>
   </ul>
 </nav>
@@ -129,42 +129,42 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Introduction to Factory Pattern (2): Factory Method</h1>
+      <h1 class="post-title">工厂模式简介（二）：工厂方法模式</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2019-09-02 </span>
         <div class="post-category">
-            <a href="/en/categories/how-to/"> how to </a>
+            <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
             </div>
-          <span class="more-meta"> 1048 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 约 1964 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
         
       </div>
     </header>
 
     <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
+  <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
 <ul>
 <li>
 <ul>
-<li><a href="#factory-method-pattern">Factory Method Pattern</a></li>
-<li><a href="#why-use-factory-method-pattern">Why use Factory Method Pattern?</a></li>
-<li><a href="#pros-and-cons">Pros and Cons?</a></li>
-<li><a href="#real-example">Real Example</a></li>
-<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#工厂方法模式">工厂方法模式</a></li>
+<li><a href="#为什么使用工厂方法模式">为什么使用工厂方法模式?</a></li>
+<li><a href="#优势和缺陷">优势和缺陷</a></li>
+<li><a href="#现实中的例子">现实中的例子</a></li>
+<li><a href="#结论">结论</a></li>
 </ul></li>
 </ul>
 </nav>
   </div>
 </div>
 <div class="post-translations">
-  <h5><i>This post is also available in following languages</i></h5>
+  <h5><i>本文另提供以下语言</i></h5>
   <ul>
     
     <li>
-      <a href="https://donggan.me/post/factory-pattern-2-factory-method/">[中文] 工厂模式简介（二）：工厂方法模式 (1964 words)</a>
+      <a href="https://donggan.me/en/post/factory-pattern-2-factory-method/">[English] Introduction to Factory Pattern (2): Factory Method (约 1048 字)</a>
     </li>
     
   </ul>
@@ -176,30 +176,33 @@
 
 <p><img src="/img/alex-suprun-AvIEqv1iY-1024x683.jpg" alt="Cover Image" /></p>
 
-<p>In my <a href="/en/post/factory-pattern-1-simple-factory-pattern">last article about Factory Pattern</a>, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types. Although  class registration techniques can be used to eliminate the couplings in some extent, they still have some major drawbacks that prevent them to be used extensively.</p>
+<p>我在<a href="/post/factory-pattern-1-simple-factory-pattern">上一篇关于工厂模式的文章</a>中介绍了一种简单、直接的方式，可以用来封装创建的逻辑而不暴露过多细节。但一个问题是每当我们添加新的产品品类的时候，我们都需要修改工厂类，因此这种方式不是很灵活。另外，它要求工厂类依赖所有具体的产品类。尽管类注册技巧可以让我们在一定程度上消除这种依赖耦合，它们还是有一些明显的缺陷以至于这种使用方式没能被广泛使用。</p>
 
-<p>In this post, we will explore the more popular Factory Method Pattern that solves the above problems.</p>
+<p>这篇文章中，我们将探索一种更流行的模式来解决这些问题：工厂方法模式。</p>
 
-<p>Before looking at how to solve the problems, let&rsquo;s first introduce Factory Method design pattern.</p>
+<p>在看怎么解决这些问题前，我们先介绍一下工厂方法这种设计模式。</p>
 
-<h2 id="factory-method-pattern">Factory Method Pattern</h2>
+<h2 id="工厂方法模式">工厂方法模式</h2>
 
-<p>&ldquo;Define an interface for creating an object, but let subclasses decide which class to instantiate. The Factory method lets a class defer instantiation it uses to subclasses.&rdquo;</p>
+<blockquote>
+<p>定义一个创建对象的接口，但让实现这个接口的类来决定实例化哪个类。工厂方法让类的实例化推迟到子类中进行。<br />
+<p style="text-align: right;"><em>——GoF：《设计模式：可复用面向对象软件的基础》</em></p></p>
+</blockquote>
 
-<p>Factory Method lets a superclass specifies all standard and generic behavior using virtul &ldquo;placeholders&rdquo; for creation steps, and then delegates the creation details to subcleasses that are supplied by the client. In other words, factory methods uses an abstract method that encapsulate object creation logic, thus the <code>new</code> operator which always creates an object is avoided.</p>
+<p>工厂方法通过在父类型中使用虚拟的“占位符”指代创建步骤来指定所有的标准的和通用的行为，然后将创建的细节代理给由客户端代码指定的子类型。换句话说，工厂方法使用抽象方法将类实例的创建逻辑封装起来，因此，总是直接创建对象的 <code>new</code> 操作符通常需要避免使用。</p>
 
-<p>Factory Methods are usually defined by an architectural framework, and then implemented by the user of the framework.</p>
+<p>工厂方法一般来说由架构性的框架来定义，由框架的使用者来实现。</p>
 
 <figure>
     <img src="/img/factory-method.png"/> <figcaption>
-            <h4>A Factory Method Example Diagram</h4>
+            <h4>工厂方法示例图</h4>
         </figcaption>
 </figure>
 
 
-<p>Above example shows a <code>CarFactory</code> interface which has 3 concrete car factory types that implement <code>CarFactory</code>. They are <code>BmwCarFactory</code>, <code>VolvoCarFactory</code> and <code>TeslaCarFactory</code>, which produces <code>BmwCar</code>, <code>VolvoCar</code> and <code>TeslaCar</code> respectively. The client <code>SimpleFactoryDemo</code> asks a concrete car factory to create <code>Car</code>, without the need of coupling the concrete car type.</p>
+<p>上图中的例子显示了 <code>CarFactory</code> 工厂类接口，以及实现了 <code>CarFactory</code> 接口的三个具体的工厂实现类 <code>BmwCarFactory</code>、<code>VolvoCarFactory</code> 和 <code>TeslaCarFactory</code>，它们分别生产创建 <code>BmwCar</code>、<code>VolvoCar</code> 和 <code>TeslaCar</code> 这几种产品类。客户端 <code>SimpleFactoryDemo</code> 使用具体的工厂实现类来生产一个 <code>Car</code> 类型，但不需要耦合具体的轿车类型。</p>
 
-<p>Here is an example of the usage.</p>
+<p>下面是使用示例代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -223,7 +226,7 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>Above are the <code>Car</code> and <code>CarFactory</code> interfaces. Now let&rsquo;s define the concrete product classes and their factories.</p>
+<p>上面是 <code>Car</code> 和 <code>CarFactory</code> 接口。接下来，我们来定义具体的产品类，和生产它们的具体的产品工厂。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -259,9 +262,9 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>As you can see above, the concrete factory class returns the abstract <code>Car</code> type  instead of the concrete type.</p>
+<p>正如上面所看到的，具体的工厂类返回的是抽象的 <code>Car</code> 类型，而非具体的某一个轿车类型。</p>
 
-<p>Now let&rsquo;s see how to use them in the client code.</p>
+<p>接下来，我们看客户端代码该如何使用它们。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -288,25 +291,25 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>As shown above, the factory returns an abstract <code>Car</code> type, which is used afterwards. There is no need to couple the concrete product type to the client code.</p>
+<p>正如上面所展示的，工厂返回抽象的 <code>Car</code> 类型对象后，后续就一直使用这个对象的引用。这里无需在客户端代码中耦合具体的产品类型。</p>
 
-<h2 id="why-use-factory-method-pattern">Why use Factory Method Pattern?</h2>
+<h2 id="为什么使用工厂方法模式">为什么使用工厂方法模式?</h2>
 
-<p>The Factory Method Pattern is to solve the problem mentioned at the beginning of this article, which is the Simple Factory Pattern requires the factory to be updated whenever there is a new product type is added in the system.</p>
+<p>工厂方法模式是用来解决本文开头中所提到的问题，即简单工厂模式中在有新的产品类添加到系统中来时需要修改工厂类。</p>
 
-<p>So when to use a Factory Method Pattern instead of a Simple Factory Pattern? when your code requires multiple factory implementations. Each factory implementation implements the same factory interface, so that the products produced by the factories has the same abstract type, which makes the client code easy to switch factory implementations.</p>
+<p>什么时候我们应该使用工厂方法模式而非简单工厂模式呢？当你的代码中需要多种工厂的实现时。由于每种具体工厂类中都实现了相同的工厂接口使得生产产品的方法都返回相同的抽象类型，这可以使得客户端代码更易于替换工厂的实现。</p>
 
-<h2 id="pros-and-cons">Pros and Cons?</h2>
+<h2 id="优势和缺陷">优势和缺陷</h2>
 
-<p>Factory Method Pattern as explained above, has advantages in extensibility since it is more flexible in adding new types. It is a good example of open-closed principle in SOLID design principles.</p>
+<p>正如上面解释的，工厂方法模式在扩展性方面拥有着很大优势，因为它在添加新类型时更为灵活。它也是软件设计原则 SOLID 中符合开闭原则一个很好的例子。</p>
 
-<p>Factory Method Pattern also has some drawbacks. As you might have noticed, factory method pattern requires you to create an interface for the Factory, and a factory implementation for each concrete factory. This leads to class explosions in amount when there are many types in a system.</p>
+<p>工厂方法模式也有缺点。可能你也注意到了，工厂方法模式要求有一个抽象的工厂类，并且对于每个具体产品类都要有一个具体的工厂实现类相对应。这将导致当系统中产品类型较多时类的数量会成倍增加。</p>
 
-<h2 id="real-example">Real Example</h2>
+<h2 id="现实中的例子">现实中的例子</h2>
 
-<p>In Java, a good example is the <code>iterator()</code> method in the collection API, which is well stated <a href="http://coding-geek.com/design-pattern-factory-patterns/#Real_examples-2">in this article</a>. Each collection implements the interface <code>Iterable&lt;E&gt;</code>, which defines a factory method <code>iterator()</code> that returns an <code>Iterator&lt;E&gt;</code>. An <code>ArrayList&lt;E&gt;</code> is a collection. So, it implements the interface <code>Iterable&lt;E&gt;</code> and overrides its factory method <code>iterator()</code> which returns a subclass of <code>Iterator&lt;E&gt;</code>.</p>
+<p>在 Java 中，一个<a href="http://coding-geek.com/design-pattern-factory-patterns/#Real_examples-2">描述自这篇文章</a>的很好的例子是集合类中的 <code>iterator()</code> 方法。JDK 中每个集合都实现了 <code>Iterable&lt;E&gt;</code> 接口，后者定义了工厂方法 <code>iterator()</code> 并且返回了迭代器 <code>Iterator&lt;E&gt;</code> 这种产品类。数组 <code>ArrayList&lt;E&gt;</code> 是一种集合实现，因此它实现了 <code>Iterable&lt;E&gt;</code> 接口并且实现了它的工厂方法 <code>iterator()</code>，返回了 <code>Iterator&lt;E&gt;</code> 的一个子类，即一个具体的迭代器。</p>
 
-<p>Below is a simplifed definition of the <code>Iterator&lt;E&gt;</code> interface from the Java source code:</p>
+<p>下面是 Java 源码中 <code>Iterator&lt;E&gt;</code> 接口的一个简化版定义：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -323,7 +326,7 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>Here is the factory interface:</p>
+<p>下面是工厂接口：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -336,7 +339,7 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>Below is a simplified definition of <code>ArrayList</code> from the java source code:</p>
+<p>然后是 Java 源码种数组 <code>ArrayList</code> 的简化版定义：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -365,9 +368,9 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>As you can see above, this shows a concrete factory that implements a factory method <code>iterator()</code>. Note in actual Java source code, <code>ArrayList</code> is derived from <code>AbstractList</code> which is the one that implements the factory method pattern.</p>
+<p>正如上面看到的，它演示了一个具体的工厂实现类实现了工厂方法 <code>iterator()</code>。注意在真实的 Java 源代码中，数组 <code>ArrayList</code> 是继承自 <code>AbstractList</code> 的一个类，后者是实际上实现了工厂方法模式的类。</p>
 
-<p>A typical use of the <code>ArrayList</code> and its iterator looks like:</p>
+<p>一个对数组 <code>ArrayList</code> 和它的迭代器的典型使用如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -400,23 +403,23 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>As shown above, the <code>Iterator</code> the <code>ArrayList</code> returns is an interface, thus the usage of it does not differ it from when getting from a <code>LinkedList</code>, a <code>HashMap</code>, a <code>HashSet</code> or any other Collection type. This is the power of this pattern: you don&rsquo;t need to know what type of collections you&rsquo;re using, each collection implementation will provide an <code>Iterator</code> through the factory method <code>iterator()</code>.</p>
+<p>正如上面演示的，数组 <code>ArrayList</code> 返回的迭代器 <code>Iterator</code> 是个接口，因此对于这个迭代器的使用方式同从链表 <code>LinkedList</code>、哈希表 <code>HashMap</code>、哈希集合 <code>HashSet</code> 或者任何其他集合类型中获取到的迭代器都没有什么两样。这正是这种模式的强大之处：你不需要了解你正在使用哪种集合，不管是哪种都会通过它的工厂方法 <code>iterator()</code> 提供一个迭代器 <code>Iterator</code> 的实例。</p>
 
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="结论">结论</h2>
 
-<p>Factory Method Pattern is a useful design pattern, when there are many concrete product types in the system, and may still be growing. Factory Method Pattern makes use of an abstract Factory interface and its factory method to have all concrete factory implementations produces the products with the same product type, thus encapsulates the producing details to the concrete factories themselves.</p>
+<p>工厂方法模式是种很有用的设计模式，适用于当系统中存在很多具体的产品类型，且这些类型可能还在增长中时。工厂方法模式通过使用一个抽象的工厂接口和其中的工厂方法，使得所有的具体工厂实现类都生产相同的产品类型，且将产品生产逻辑细节封装在了具体的工厂实现类中。</p>
 
-<p>However, this pattern comes with the cost that it can expand the total number of classes in a system. Every concrete product class also requires a concrete factory class.</p>
+<p>然而，这种模式的代价是它将会带来系统中类数量的提升，因为每个具体的产品类都需要一个具体的工厂类来辅助生产。</p>
 
     </div>
 
     <div class="post-copyright">
   <p class="copyright-item">
-    <span class="item-title">Author</span>
-    <span class="item-content">Gan Dong</span>
+    <span class="item-title">文章作者</span>
+    <span class="item-content">董干</span>
   </p>
   <p class="copyright-item">
-    <span class="item-title">LastMod</span>
+    <span class="item-title">上次更新</span>
     <span class="item-content">
         2019-10-06
         
@@ -427,16 +430,20 @@
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/en/tags/design-patterns/">design patterns</a>
-          <a href="/en/tags/oop/">OOP</a>
-          <a href="/en/tags/java/">Java</a>
-          <a href="/en/tags/factory-method/">Factory Method</a>
+          <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+          <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
+          <a href="/tags/java/">Java</a>
+          <a href="/tags/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">工厂方法模式</a>
           </div>
       <nav class="post-nav">
-        
-        <a class="next" href="/en/post/factory-pattern-1-simple-factory-pattern/">
-            <span class="next-text nav-default">Introduction to Factory Pattern (1): Simple Factory Pattern</span>
-            <span class="next-text nav-mobile">Next</span>
+        <a class="prev" href="/post/migrate-from-wp-to-hugo/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">从 Wordpress 迁移到 Hugo</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/install-shadowsocks-on-ubuntu-16-04/">
+            <span class="next-text nav-default">在 Ubuntu 16.04 上安装 shadowsocks server</span>
+            <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
       </nav>
@@ -468,16 +475,16 @@
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="https://twitter.com/__gdong__" class="iconfont icon-twitter" title="twitter"></a>
-  <a href="https://donggan.me/en/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://donggan.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
   <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme - 
+    主题 - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
