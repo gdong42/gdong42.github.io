@@ -54,7 +54,7 @@ Of course, design patterns might have been thrown away as the essence of Object-
 
 <meta itemprop="datePublished" content="2018-12-16T00:15:26&#43;08:00" />
 <meta itemprop="dateModified" content="2019-10-06T00:12:23&#43;08:00" />
-<meta itemprop="wordCount" content="1902">
+<meta itemprop="wordCount" content="1964">
 
 
 
@@ -140,8 +140,8 @@ Of course, design patterns might have been thrown away as the essence of Object-
         <div class="post-category">
             <a href="/en/categories/how-to/"> how to </a>
             </div>
-          <span class="more-meta"> 1902 words </span>
-          <span class="more-meta"> 9 mins read </span>
+          <span class="more-meta"> 1964 words </span>
+          <span class="more-meta"> 10 mins read </span>
         
       </div>
     </header>
@@ -157,6 +157,7 @@ Of course, design patterns might have been thrown away as the essence of Object-
 <ul>
 <li><a href="#simple-factory-pattern">Simple Factory Pattern</a></li>
 <li><a href="#pros-and-cons">Pros and Cons</a></li>
+<li><a href="#real-example">Real Example</a></li>
 </ul></li>
 <li><a href="#a-step-further">A Step Further</a>
 <ul>
@@ -177,7 +178,7 @@ Of course, design patterns might have been thrown away as the essence of Object-
   <ul>
     
     <li>
-      <a href="https://donggan.me/post/factory-pattern-1-simple-factory-pattern/">[中文] 工厂模式简介（一）：简单工厂模式 (3162 words)</a>
+      <a href="https://donggan.me/post/factory-pattern-1-simple-factory-pattern/">[中文] 工厂模式简介（一）：简单工厂模式 (3314 words)</a>
     </li>
     
   </ul>
@@ -294,6 +295,21 @@ Of course, design patterns might have been thrown away as the essence of Object-
 
 <p>Another problem is that <code>SimpleCarFactory</code> class has to depend on all car types, due to the truth that it contains all creation invocation logic in one giant factory. This leads to the client code coupling all product types,  which might never be called by the client, and thus should be optional instead of mandatory dependencies. What we expect is that when we need some kind of product, we use a factory to create it, only with required dependency that has the underlying implementation module.</p>
 
+<h3 id="real-example">Real Example</h3>
+
+<p>In Java, an good example is the <code>String.valueOf()</code> method series.</p>
+
+<p>The <code>String</code> class in Java represents a string. Sometimes, you need to get a string from a boolean or an integer. But <code>String</code> doesn’t provide constructors like <code>String(Integer i)</code> or <code>String(Boolean b)</code>. Instead, it provides multiple simple factory methods <code>String.valueOf(…)</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">i</span> <span class="o">=</span> <span class="n">12</span><span class="p">;</span>
+<span class="n">String</span> <span class="nf">integerAsString</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">i</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="a-step-further">A Step Further</h2>
 
 <p>Let&rsquo;s take a step further and see how to improve this pattern to solve above problems.</p>

@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2018-12-16T00:15:26&#43;08:00" />
 <meta itemprop="dateModified" content="2019-10-06T01:01:48&#43;08:00" />
-<meta itemprop="wordCount" content="3162">
+<meta itemprop="wordCount" content="3314">
 
 
 
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
             </div>
-          <span class="more-meta"> 约 3162 字 </span>
+          <span class="more-meta"> 约 3314 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
         
       </div>
@@ -153,6 +153,7 @@
 <ul>
 <li><a href="#简单工厂">简单工厂</a></li>
 <li><a href="#优势和缺点">优势和缺点</a></li>
+<li><a href="#现实中的例子">现实中的例子</a></li>
 </ul></li>
 <li><a href="#更上一层楼">更上一层楼</a>
 <ul>
@@ -173,7 +174,7 @@
   <ul>
     
     <li>
-      <a href="https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/">[English] Introduction to Factory Pattern (1): Simple Factory Pattern (约 1902 字)</a>
+      <a href="https://donggan.me/en/post/factory-pattern-1-simple-factory-pattern/">[English] Introduction to Factory Pattern (1): Simple Factory Pattern (约 1964 字)</a>
     </li>
     
   </ul>
@@ -288,6 +289,21 @@
 
 <p>另外，<code>SimpleCarFactory</code> 这个工厂类因为需要包含所有 <code>Car</code> 的生产逻辑，它必须依赖所有的类型。这导致客户端代码耦合所有的可选产品类型，而这些产品类型的依赖调用端可能永远也不需要使用。假设我们将各种具体产品类型和它们相关的实现类分别打包成为独立模块，则这个超级工厂需要依赖所有的模块。而我们希望的是，当我们生产某种特定的产品类型时，提供相应的实现的模块依赖即可。</p>
 
+<h3 id="现实中的例子">现实中的例子</h3>
+
+<p>在 Java 中，<code>String.valueOf()</code> 系列方法是简单工厂的一个不错的例子。</p>
+
+<p><code>String</code> 类在 Java 中代表字符串。有时，我们需要从布尔或是整数类型的变量中获得它们的字符串表示。<code>String</code> 并没有提供像是 <code>String(Integer i)</code> 或 <code>String(Boolean b)</code> 这样的构造器，而是提供了多种简单工厂方法 <code>String.valueOf(…)</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">i</span> <span class="o">=</span> <span class="n">12</span><span class="p">;</span>
+<span class="n">String</span> <span class="nf">integerAsString</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">i</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="更上一层楼">更上一层楼</h2>
 
 <p>如何基于这种方式改进解决这些问题呢？</p>
