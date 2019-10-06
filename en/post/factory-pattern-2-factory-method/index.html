@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Introduction to Factory Pattern (2): Factory Method - Gan&#39;s Blog - Dumps to digest.</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Gan Dong" /><meta name="description" content="In my last article about Factory Pattern, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types.
+In this post, we will explore other options that might solve the above problems." /><meta name="keywords" content="Gan Dong, 董干, donggan, donggan.me" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://donggan.me/en/post/factory-pattern-2-factory-method/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/main.css">
+
+
+<meta property="og:title" content="Introduction to Factory Pattern (2): Factory Method" />
+<meta property="og:description" content="In my last article about Factory Pattern, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types.
+In this post, we will explore other options that might solve the above problems." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://donggan.me/en/post/factory-pattern-2-factory-method/" />
+<meta property="article:published_time" content="2019-09-02T21:28:38+08:00" />
+<meta property="article:modified_time" content="2019-10-06T14:40:38+08:00" />
+<meta itemprop="name" content="Introduction to Factory Pattern (2): Factory Method">
+<meta itemprop="description" content="In my last article about Factory Pattern, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types.
+In this post, we will explore other options that might solve the above problems.">
+
+
+<meta itemprop="datePublished" content="2019-09-02T21:28:38&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-06T14:40:38&#43;08:00" />
+<meta itemprop="wordCount" content="1018">
+
+
+
+<meta itemprop="keywords" content="design patterns,OOP,Java,Factory Method," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Introduction to Factory Pattern (2): Factory Method"/>
+<meta name="twitter:description" content="In my last article about Factory Pattern, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types.
+In this post, we will explore other options that might solve the above problems."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/en/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/en/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/en/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/en/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/en/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/en/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/">
+        <li class="mobile-menu-item">中文</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/en/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/en/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/">中文</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Introduction to Factory Pattern (2): Factory Method</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-02 </span>
+        <div class="post-category">
+            <a href="/en/categories/how-to/"> how to </a>
+            </div>
+          <span class="more-meta"> 1018 words </span>
+          <span class="more-meta"> 5 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#factory-method-pattern">Factory Method Pattern</a></li>
+<li><a href="#why-use-factory-method-pattern">Why use Factory Method Pattern?</a></li>
+<li><a href="#pros-and-cons">Pros and Cons?</a></li>
+<li><a href="#real-example">Real Example</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    <div class="post-content">
+      
+
+<p><img src="/img/alex-suprun-AvIEqv1iY-1024x683.jpg" alt="Cover Image" /></p>
+
+<p>In my <a href="/en/post/factory-pattern-1-simple-factory-pattern">last article about Factory Pattern</a>, a simple and intuitive method was introduced to encapsulate product creation logic without exposing details. The problem is that once we add a new concrete product call we have to modify the Factory class. It is not very flexible and requires the factory depending all concrete product types.</p>
+
+<p>In this post, we will explore other options that might solve the above problems.</p>
+
+<p>Before looking at how to solve the problems, let&rsquo;s first introduce Factory Method design pattern.</p>
+
+<h2 id="factory-method-pattern">Factory Method Pattern</h2>
+
+<p>&ldquo;Define an interface for creating an object, but let subclasses decide which class to instantiate. The Factory method lets a class defer instantiation it uses to subclasses.&rdquo;</p>
+
+<p>Factory Method lets a superclass specifies all standard and generic behavior using virtul &ldquo;placeholders&rdquo; for creation steps, and then delegates the creation details to subcleasses that are supplied by the client. In other words, factory methods uses an abstract method that encapsulate object creation logic, thus the <code>new</code> operator which always creates an object is avoided.</p>
+
+<p>Factory Methods are usually defined by an architectural framework, and then implemented by the user of the framework.</p>
+
+<figure>
+    <img src="/img/factory-method.png"/> <figcaption>
+            <h4>A Factory Method Example Diagram</h4>
+        </figcaption>
+</figure>
+
+
+<p>Above example shows a <code>CarFactory</code> interface which has 3 concrete car factory types that implement <code>CarFactory</code>. They are <code>BmwCarFactory</code>, <code>VolvoCarFactory</code> and <code>TeslaCarFactory</code>, which produces <code>BmwCar</code>, <code>VolvoCar</code> and <code>TeslaCar</code> respectively. The client <code>SimpleFactoryDemo</code> asks a concrete car factory to create <code>Car</code>, without the need of coupling the concrete car type.</p>
+
+<p>Here is an example of the usage.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">interface</span> <span class="n">Car</span> <span class="p">{</span>
+  <span class="kt">void</span> <span class="nf">drive</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">interface</span> <span class="n">CarFactory</span> <span class="p">{</span>
+  <span class="n">Car</span> <span class="nf">create</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Above are the <code>Car</code> and <code>CarFactory</code> interfaces. Now let&rsquo;s define the concrete product classes and their factories.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">BmwCar</span> <span class="nf">implements</span> <span class="n">Car</span> <span class="p">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="nf">void</span> <span class="n">drive</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Calling BmwCar::drive() method.&#34;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">BmwCarFactory</span> <span class="nf">implements</span> <span class="n">CarFactory</span> <span class="p">{</span>
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="nf">Car</span> <span class="n">create</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">BmwCar</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>As you can see above, the concrete factory class returns the abstract <code>Car</code> type  instead of the concrete type.</p>
+
+<p>Now let&rsquo;s see how to use them in the client code.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">FactoryMethodDemo</span> <span class="p">{</span>
+
+  <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">args</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">CarFactory</span> <span class="nf">carFactory1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BmwCarFactory</span><span class="p">();</span>
+    <span class="n">Car</span> <span class="nf">car1</span> <span class="o">=</span> <span class="n">carFactory1</span><span class="p">.</span><span class="na">create</span><span class="p">();</span>
+    <span class="n">car1</span><span class="p">.</span><span class="na">drive</span><span class="p">();</span>
+  <span class="p">}</span>
+
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>As shown above, the factory returns an abstract <code>Car</code> type, which is used afterwards. There is no need to couple the concrete product type to the client code.</p>
+
+<h2 id="why-use-factory-method-pattern">Why use Factory Method Pattern?</h2>
+
+<p>The Factory Method Pattern is to solve the problem mentioned at the beginning of this article, which is the Simple Factory Pattern requires the factory to be updated whenever there is a new product type is added in the system.</p>
+
+<p>So when to use a Factory Method Pattern instead of a Simple Factory Pattern? when your code requires multiple factory implementations. Each factory implementation implements the same factory interface, so that the products produced by the factories has the same abstract type, which makes the client code easy to switch factory implementations.</p>
+
+<h2 id="pros-and-cons">Pros and Cons?</h2>
+
+<p>Factory Method Pattern as explained above, has advantages in extensibility since it is more flexible in adding new types. It is a good example of open-closed principle in SOLID design principles.</p>
+
+<p>Factory Method Pattern also has some drawbacks. As you might have noticed, factory method pattern requires you to create an interface for the Factory, and a factory implementation for each concrete factory. This leads to class explosions in amount when there are many types in a system.</p>
+
+<h2 id="real-example">Real Example</h2>
+
+<p>In Java, a good example is the <code>iterator()</code> method in the collection API, which is well stated <a href="http://coding-geek.com/design-pattern-factory-patterns/#Real_examples-2">in this article</a>. Each collection implements the interface <code>Iterable&lt;E&gt;</code>, which defines a factory method <code>iterator()</code> that returns an <code>Iterator&lt;E&gt;</code>. An <code>ArrayList&lt;E&gt;</code> is a collection. So, it implements the interface <code>Iterable&lt;E&gt;</code> and overrides its factory method <code>iterator</code> which returns a subclass of <code>Iterator&lt;E&gt;</code>.</p>
+
+<p>Below is a simplifed definition of the <code>Iterator&lt;E&gt;</code> interface from the Java source code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">interface</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="p">();</span>
+    <span class="n">E</span> <span class="nf">next</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">remove</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Here is the factory interface:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">interface</span> <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Below is a simplified definition of ArrayList from the java source code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">class</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="p">{</span>
+ <span class="c1">//the iterator() returns a subtype and an &#34;anonymous&#34; Iterator&lt;E&gt;
+</span><span class="c1"></span> <span class="kd">public</span> <span class="nf">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="p">()</span>
+   <span class="p">{</span>
+     <span class="k">return</span> <span class="k">new</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">()</span>
+     <span class="p">{</span>
+    <span class="c1">//implementation of the methods hasNext(), next() and remove()
+</span><span class="c1"></span>     <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">...</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>As you can see above, this shows a concrete factory that implements a factory method <code>iterator()</code>. Note in actual Java source code, <code>ArrayList</code> is derived from <code>AbstractList</code> which is the one that implements the factory method pattern.</p>
+
+<p>A typical use of the <code>ArrayList</code> and its iterator looks like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">ArrayList</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Iterator</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nf">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">List</span><span class="p">;</span>
+ 
+<span class="kd">public</span> <span class="nf">class</span> <span class="n">Example</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="nf">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="nf">ars</span><span class="p">){</span>
+        <span class="c1">// instantiation of the (concrete factory) ArrayList
+</span><span class="c1"></span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">myArrayList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        
+        <span class="c1">// calling the factory method iterator() of ArrayList
+</span><span class="c1"></span>        <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">myIterator</span> <span class="o">=</span> <span class="n">myArrayList</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>As shown above, the <code>Iterator</code> the ArrayList returns is an interface, thus the usage of it does not differ it from when getting from a <code>LinkedList</code>, a <code>HashMap</code>, a <code>HashSet</code> or any other Collection type. This is the power of this pattern: you don&rsquo;t need to know what type of collections you&rsquo;re using, each collection implementation will provide an <code>Iterator</code> through the factory method <code>iterator()</code>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Factory Method Pattern is a useful design pattern, when there are many concrete product types in the system, and may still be growing. Factory Method Pattern makes use of an abstract Factory interface and its factory method to have all concrete factory implementations produces the products with the same product type, thus encapsulates the producing details to the concrete factories themselves.</p>
+
+<p>However, this pattern comes with the cost that it can expand the total number of classes in a system. Every concrete product class also requires a concrete factory class.</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Gan Dong</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-10-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/en/tags/design-patterns/">design patterns</a>
+          <a href="/en/tags/oop/">OOP</a>
+          <a href="/en/tags/java/">Java</a>
+          <a href="/en/tags/factory-method/">Factory Method</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/en/post/factory-pattern-1-simple-factory-pattern/">
+            <span class="next-text nav-default">Introduction to Factory Pattern (1): Simple Factory Pattern</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'donggan-me';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/__gdong__" class="iconfont icon-twitter" title="twitter"></a>
+  <a href="https://donggan.me/en/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2014 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">董干</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77549857-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

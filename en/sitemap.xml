@@ -10,28 +10,70 @@
   
   <url>
     <loc>https://donggan.me/en/categories/</loc>
-    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/tags/design-patterns/</loc>
-    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/en/tags/factory-method/</loc>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/</loc>
-    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://donggan.me/en/categories/how-to/</loc>
-    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/en/post/factory-pattern-2-factory-method/</loc>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/en/tags/java/</loc>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/en/tags/oop/</loc>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/en/post/</loc>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/en/tags/</loc>
+    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -44,35 +86,7 @@
   </url>
   
   <url>
-    <loc>https://donggan.me/en/tags/java/</loc>
-    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://donggan.me/en/tags/oop/</loc>
-    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://donggan.me/en/post/</loc>
-    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://donggan.me/en/tags/simple-factory-pattern/</loc>
-    <lastmod>2019-10-06T00:12:23+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://donggan.me/en/tags/</loc>
     <lastmod>2019-10-06T00:12:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

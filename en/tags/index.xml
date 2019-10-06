@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Gan&#39;s Blog - Dumps to digest.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 16 Dec 2018 00:15:26 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 02 Sep 2019 21:28:38 +0800</lastBuildDate>
     
 	<atom:link href="https://donggan.me/en/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,16 +14,25 @@
     <item>
       <title>design patterns</title>
       <link>https://donggan.me/en/tags/design-patterns/</link>
-      <pubDate>Sun, 16 Dec 2018 00:15:26 +0800</pubDate>
+      <pubDate>Mon, 02 Sep 2019 21:28:38 +0800</pubDate>
       
       <guid>https://donggan.me/en/tags/design-patterns/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Factory Method</title>
+      <link>https://donggan.me/en/tags/factory-method/</link>
+      <pubDate>Mon, 02 Sep 2019 21:28:38 +0800</pubDate>
+      
+      <guid>https://donggan.me/en/tags/factory-method/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Java</title>
       <link>https://donggan.me/en/tags/java/</link>
-      <pubDate>Sun, 16 Dec 2018 00:15:26 +0800</pubDate>
+      <pubDate>Mon, 02 Sep 2019 21:28:38 +0800</pubDate>
       
       <guid>https://donggan.me/en/tags/java/</guid>
       <description></description>
@@ -32,7 +41,7 @@
     <item>
       <title>OOP</title>
       <link>https://donggan.me/en/tags/oop/</link>
-      <pubDate>Sun, 16 Dec 2018 00:15:26 +0800</pubDate>
+      <pubDate>Mon, 02 Sep 2019 21:28:38 +0800</pubDate>
       
       <guid>https://donggan.me/en/tags/oop/</guid>
       <description></description>
