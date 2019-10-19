@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VPN on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/tags/vpn/</link>
+    <description>Recent content in VPN on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 15 Oct 2019 23:40:22 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/tags/vpn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>3分钟快速在 Ubuntu 上安装 OpenVPN</title>
+      <link>https://donggan.me/post/install-openvpn-on-ubuntu-in-3min/</link>
+      <pubDate>Tue, 15 Oct 2019 23:40:22 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/install-openvpn-on-ubuntu-in-3min/</guid>
+      <description>OpenVPN 是一个开源的商业 VPN 服务软件，是一种可以提供访问远程资源安全的虚拟专用网络。 它可以同时给多个客户端提供服务，通过给每个客户端颁发一个鉴权证书</description>
+    </item>
+    
+  </channel>
+</rss>

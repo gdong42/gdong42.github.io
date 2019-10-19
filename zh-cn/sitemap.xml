@@ -9,6 +9,62 @@
   </url>
   
   <url>
+    <loc>https://donggan.me/post/install-openvpn-on-ubuntu-in-3min/</loc>
+    <lastmod>2019-10-20T00:43:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/categories/</loc>
+    <lastmod>2019-10-20T00:43:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/</loc>
+    <lastmod>2019-10-20T00:43:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/post/</loc>
+    <lastmod>2019-10-20T00:43:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/</loc>
+    <lastmod>2019-10-20T00:43:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/ubuntu/</loc>
+    <lastmod>2019-10-20T00:43:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/vpn/</loc>
+    <lastmod>2019-10-20T00:43:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/categories/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2019-10-20T00:43:31+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://donggan.me/tags/blog/</loc>
     <lastmod>2019-09-15T16:57:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -16,36 +72,8 @@
   </url>
   
   <url>
-    <loc>https://donggan.me/categories/</loc>
-    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://donggan.me/</loc>
-    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://donggan.me/tags/hugo/</loc>
     <lastmod>2019-09-15T16:57:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://donggan.me/post/</loc>
-    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://donggan.me/tags/</loc>
-    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -60,13 +88,6 @@
   <url>
     <loc>https://donggan.me/post/migrate-from-wp-to-hugo/</loc>
     <lastmod>2019-09-15T16:57:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://donggan.me/categories/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2019-10-06T14:40:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -108,13 +129,6 @@
   
   <url>
     <loc>https://donggan.me/tags/shadowsocks/</loc>
-    <lastmod>2019-01-14T23:32:34+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://donggan.me/tags/ubuntu/</loc>
     <lastmod>2019-01-14T23:32:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

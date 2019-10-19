@@ -6,10 +6,19 @@
     <description>Recent content in Ubuntu on Gan&#39;s Blog - Dumps to digest.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 14 Jan 2019 23:32:34 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 15 Oct 2019 23:40:22 +0800</lastBuildDate>
     
 	<atom:link href="https://donggan.me/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>3分钟快速在 Ubuntu 上安装 OpenVPN</title>
+      <link>https://donggan.me/post/install-openvpn-on-ubuntu-in-3min/</link>
+      <pubDate>Tue, 15 Oct 2019 23:40:22 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/install-openvpn-on-ubuntu-in-3min/</guid>
+      <description>OpenVPN 是一个开源的商业 VPN 服务软件，是一种可以提供访问远程资源安全的虚拟专用网络。 它可以同时给多个客户端提供服务，通过给每个客户端颁发一个鉴权证书</description>
+    </item>
     
     <item>
       <title>在 Ubuntu 16.04 上安装 shadowsocks server</title>
