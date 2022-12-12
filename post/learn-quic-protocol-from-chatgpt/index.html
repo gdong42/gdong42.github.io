@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>向AI学知识：和 ChatGPT 聊 QUIC 协议 - Gan&#39;s Blog - Dumps to digest.</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="董干" /><meta name="description" content="&amp;ldquo;你是否曾经梦想过跟一个超级智能聊天机器人聊天？那么，让我们一起来了解 ChatGPT，这款基于大规模语言模型的聊天机器人。&amp;rd" /><meta name="keywords" content="Gan Dong, 董干, donggan, donggan.me" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with theme even" />
+
+
+<link rel="canonical" href="https://donggan.me/post/learn-quic-protocol-from-chatgpt/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.000d6e30802622fdc171e19eed218800c6c365d184567c00818f877d862fdbf5.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/main.css">
+
+
+<meta property="og:title" content="向AI学知识：和 ChatGPT 聊 QUIC 协议" />
+<meta property="og:description" content="&ldquo;你是否曾经梦想过跟一个超级智能聊天机器人聊天？那么，让我们一起来了解 ChatGPT，这款基于大规模语言模型的聊天机器人。&rd" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://donggan.me/post/learn-quic-protocol-from-chatgpt/" />
+<meta property="article:published_time" content="2022-12-11T13:32:00+08:00" />
+<meta property="article:modified_time" content="2022-12-12T01:40:48+08:00" />
+<meta itemprop="name" content="向AI学知识：和 ChatGPT 聊 QUIC 协议">
+<meta itemprop="description" content="&ldquo;你是否曾经梦想过跟一个超级智能聊天机器人聊天？那么，让我们一起来了解 ChatGPT，这款基于大规模语言模型的聊天机器人。&rd">
+
+
+<meta itemprop="datePublished" content="2022-12-11T13:32:00&#43;08:00" />
+<meta itemprop="dateModified" content="2022-12-12T01:40:48&#43;08:00" />
+<meta itemprop="wordCount" content="5130">
+
+
+
+<meta itemprop="keywords" content="AI,ChatGPT,QUIC,IoT,人工智能,物联网," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="向AI学知识：和 ChatGPT 聊 QUIC 协议"/>
+<meta name="twitter:description" content="&ldquo;你是否曾经梦想过跟一个超级智能聊天机器人聊天？那么，让我们一起来了解 ChatGPT，这款基于大规模语言模型的聊天机器人。&rd"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/en/">
+        <li class="mobile-menu-item">En</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/">En</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">向AI学知识：和 ChatGPT 聊 QUIC 协议</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-12-11 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%A7%82%E7%82%B9/"> 观点 </a>
+            </div>
+          <span class="more-meta"> 约 5130 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#话题背景">话题背景</a></li>
+<li><a href="#聊天纪实">聊天纪实</a></li>
+<li><a href="#一点感悟">一点感悟</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    <div class="post-content">
+      
+
+<p>&ldquo;你是否曾经梦想过跟一个超级智能聊天机器人聊天？那么，让我们一起来了解 ChatGPT，这款基于大规模语言模型的聊天机器人。&rdquo;</p>
+
+<p>上面的文章开头大家觉得如何？这是我咨询一款近期很火的聊天机器人ChatGPT后得到的建议。</p>
+
+<p><img src="/img/chat-gpt-01.png" alt="Cover Image" /></p>
+
+<p>这开头似乎看起来并没有那么的有趣，看来这方面它并不怎么擅长。但和ChatGPT聊了个技术话题后，我发现在专业知识领域方面，它非常的擅长，给了我很大惊喜，第一次让我觉得AI能给我日常工作和生活带来实质性的帮助。</p>
+
+<p>这篇文章就打算展示下这次对话的实录，算是一次里程碑式的纪念。</p>
+
+<h2 id="话题背景">话题背景</h2>
+
+<p>之前就对QUIC协议有一定了解，但程度仅限于知道“它是基于UDP的一种新的传输协议，相比TCP在性能上有很大优势”，对QUIC协议的具体特性和应用场景并不太了解。正好最近因为工作的原因，想再调研下QUIC协议是否适用于物联网场景，打算抽个时间学习了解一下。</p>
+
+<p>正好这个时候 ChatGPT 出现了，正好用这个话题测试了一下，它表现如何，各位读者可以自行判断。</p>
+
+<h2 id="聊天纪实">聊天纪实</h2>
+
+<figure>
+    <img src="/img/chat-gpt-02.png"/> <figcaption>
+            <h4>与ChatGPT聊天片段</h4>
+        </figcaption>
+</figure>
+
+
+<p><em>以下DG为笔者，C为ChatGPT</em></p>
+
+<div class="admonition quote"><p class="admonition-title">DG：什么是Quic</p>
+  
+C：QUIC是一种新型的网络传输协议，全称为Quick UDP Internet Connections（快速UDP互联网连接）。它是由谷歌开发的，旨在提高网络传输的速度和效率。与传统的传输协议（如TCP）不同，QUIC可以在更短的时间内建立连接，并通过优化数据包传输来提高网络速度。它还支持加密，可以提高网络传输的安全性。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：它适合哪些应用场景？</p>
+  
+C：QUIC适用于需要快速建立连接并传输大量数据的应用场景。例如，在视频会议或在线游戏中，用户可以通过使用QUIC协议来提高传输速度和效率。此外，由于QUIC支持加密，它也可以用于提高网络传输安全性的应用场景，例如在网络安全敏感的医疗信息系统中。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：弱网场景下表现如何</p>
+  
+（报错）
+<br>
+C：An error occurred. If this issue persists please contact us through our help center at help.openai.com.
+<br>
+（重试后）
+<br>
+C：在弱网场景下，QUIC的表现与其他传输协议相比可能不会有明显的优势。由于QUIC建立连接所需的时间比较短，因此在网络信号较好的情况下可能会表现较好。但是，在弱网环境下，由于网络信号较差，数据传输可能会更加困难，因此QUIC的性能可能不会有明显的优势。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：那QUIC和TCP相比有哪些异同？各有什么优劣势？</p>
+  
+C：QUIC和TCP都是网络传输协议，但它们有一些重要的区别。
+<br>
+一个重要的区别是，QUIC可以在更短的时间内建立连接，而TCP需要更长的时间才能建立连接。这意味着，在需要快速建立连接的应用场景中，QUIC可能会更加优秀。
+<br>
+另一个区别是，QUIC可以优化数据包传输，从而提高网络速度。相比之下，TCP的数据包传输不太灵活，因此可能不能像QUIC那样提高网络速度。
+<br>
+此外，QUIC支持加密，因此在网络安全方面可能会更加优秀。而TCP则不支持加密，因此在网络安全方面可能会比QUIC差一些。
+<br>
+总的来说，QUIC和TCP各有优劣势。QUIC可以快速建立连接，提高网络速度，支持加密，因此在某些应用场景下可能会更加优秀。但是，TCP作为一种比较成熟的协议，已经被广泛应用，具有良好的稳定性，因此在某些情况下仍然是一个比较好的选择。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：QUIC在物联网场景下有什么发挥空间么？</p>
+  
+C：在物联网场景下，QUIC可能会有一定的发挥空间。由于物联网设备通常具有更弱的计算能力和更小的内存容量，因此它们在通信方面可能会有一些限制。使用QUIC协议可以让这些设备在更短的时间内建立连接，并通过优化数据包传输来提高通信效率。此外，QUIC还支持加密，可以提高物联网通信的安全性。因此，在某些情况下，使用QUIC协议可能会有一定的优势。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：讲讲QUIC的加密是什么原理，它和TCP over TLS比有什么差异？</p>
+  
+C：QUIC采用TLS作为加密协议，并对传输层进行了扩展，从而在传输层上实现了加密。相比之下，TCP over TLS则是在传输层与应用层之间加入了一个TLS层，用于对数据进行加密。
+<br>
+两种方式的差异在于，QUIC直接在传输层上实现了加密，因此可以在建立连接时就开始进行加密，并在整个连接期间保持加密。相比之下，TCP over TLS则是在连接建立后再进行加密，并且在连接断开后加密也就结束了。
+<br>
+因此，QUIC的加密可能会更加安全，因为它能够在整个连接期间保持加密。但是，由于QUIC的加密直接集成在传输层上，因此它可能比TCP over TLS更加复杂，并且也可能存在一些安全漏洞。因此，在选择加密方式时需要认真考虑具体情况。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：QUIC算是哪一层的协议呢，它和UDP之间的关系是什么？</p>
+  
+C：QUIC是一种传输层协议，它主要负责在两个主机之间传输数据。QUIC的实现基于UDP协议，但它并不完全等同于UDP。相比之下，UDP是一种比较基础的协议，它主要负责将数据报文在网络中进行传输，但并不提供其他额外的功能。
+<br>
+因此，可以说QUIC是在UDP的基础上进行扩展，它提供了更多的功能，并对UDP进行了优化，从而提高了传输效率。但是，由于QUIC实现的比较复杂，因此它可能也会带来一些额外的复杂度和开销。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：QUIC基于UDP，是指实现基于UDP，还是指运行时基于UDP实现？</p>
+  
+C：QUIC是在实现时基于UDP的。这意味着，QUIC在实现时使用了UDP协议，并在UDP的基础上进行了扩展，从而提供了更多的功能和优化。这与运行时基于UDP实现是不同的，运行时指的是QUIC在运行时使用UDP进行数据传输。
+<br>
+QUIC的实现基于UDP的原因是，UDP提供了一个简单、快速、可靠的数据传输基础，因此可以作为QUIC的基础，为QUIC提供必要的传输支持。同时，QUIC还可以通过对UDP的扩展和优化，来提高传输效率，实现一些更加高级的功能。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：QUIC和HTTP3的关系？</p>
+  
+C：QUIC和HTTP3是两个不同的协议，但它们之间存在一定的关系。
+首先，QUIC是一种传输层协议，主要负责在两个主机之间传输数据。而HTTP3是一种应用层协议，主要负责在Web浏览器和Web服务器之间进行通信。
+<br>
+其次，QUIC和HTTP3可以相互配合使用。通常情况下，QUIC可以为HTTP3提供传输层支持，而HTTP3则可以在QUIC的基础上实现应用层的通信。这样，QUIC和HTTP3就可以协同工作，共同完成网络通信的任务。
+<br>
+总的来说，QUIC和HTTP3是两个相互独立的协议，但它们之间也存在一定的联系。它们可以相互配合使用，共同实现网络通信的功能。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：QUIC和MQTT协议可以搭配使用么？</p>
+  
+
+C：QUIC和MQTT协议可以搭配使用。
+<br>
+首先，QUIC是一种传输层协议，主要负责在两个主机之间传输数据。而MQTT是一种应用层协议，主要负责在物联网设备之间进行通信。
+其次，QUIC和MQTT可以相互配合使用。通常情况下，QUIC可以为MQTT提供传输层支持，而MQTT则可以在QUIC的基础上实现应
+
+</div>
+
+<p><em>（卡壳了）</em></p>
+
+<div class="admonition quote"><p class="admonition-title">DG：继续说</p>
+  
+C：续，通过QUIC和MQTT的搭配使用，可以提高物联网设备之间的通信效率，并且可以保证数据的安全传输。
+<br>
+总的来说，QUIC和MQTT协议都是常用的协议，它们可以相互配合使用，从而提高网络通信的效率和安全性。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：在弱网场景下，QUIC建立连接相比TCP来说能快到什么程度呢</p>
+  
+C：在弱网场景下，QUIC可能会比TCP更快建立连接。由于QUIC在传输层上实现了一些优化措施，因此它可以在更短的时间内建立连接，并且可以通过优化数据包传输来提高通信效率。
+<br>
+但是，在弱网场景下，QUIC与TCP之间的性能差异可能并不显著。由于弱网环境下的网络状态不稳定，数据传输可能会受到很多因素的影响，因此QUIC和TCP的性能差异可能并不明显。
+<br>
+因此，在弱网场景下，QUIC与TCP之间的性能差异取决于具体的网络状态和使用情况，可能会有所不同。但无论如何，QUIC都可以通过优化数据包传输来提高通信效率，并为应用程序提供较为稳定的网络连接。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：QUIC比TCP快多少，有数据对比吗</p>
+  
+
+C：目前尚不清楚QUIC与TCP之间的性能差异有多大。不同的研究可能会得出不同的结论，因此无法给出一个统一的数据对比。
+
+通常情况下，QUIC在传输层上进行了一些优化，因此它可能会比TCP更快建立连接，并且在传输数据时也可能会更快。但是，由于网络环境的复杂性，QUIC与TCP之间的性能差异可能会因为网络状态和使用情况的不同而有所变化。
+
+因此，在确定QUIC与TCP之间的性能差异时，
+
+</div>
+
+<p><em>（又卡壳）</em></p>
+
+<div class="admonition quote"><p class="admonition-title">DG：？</p>
+  
+
+C：需要考虑多种因素，并进行实际测试来确定。另外，还需要注意，性能并不是协议选择的唯一因素，在选择协议时还需要考虑其他因素，比如安全性、可扩展性等。
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：关于物联网设备使用QUIC协议通过短连接传输数据 vs 使用TCP长连接传输数据，对设备的功耗消耗对比有相关研究么？</p>
+  
+
+C：目前尚不清楚QUIC与TCP在物联网设备的功耗消耗方面存在哪些差异。不同的研究可能会得出不同的结论，因此无法给出一个统一的数据对比。
+<br>
+在一般情况下，短连接和长连接可能会对设备的功耗消耗造成不同的影响。通常来说，短连接可能会更省电，因为它不需要长时间维护连接，而长连接则需要长时间维护连接，因此可能会更消耗电量。
+<br>
+然而，在实际的使用中，QUIC和TCP的功耗消耗情况可能并不完全一致。由于QUIC在传输层上进行了一些优化，因此它可能在一定程度上减少了功耗消耗。因此，QUIC和TCP在物联网设备的功耗消耗方面的差异可能会因为实际使用情况的不同而有所变化。
+<br>
+因此，要确定QUIC与TCP在物联网设备的功耗消耗方面的差异
+
+
+</div>
+
+<p><em>（又卡壳）</em></p>
+
+<div class="admonition quote"><p class="admonition-title">DG：？</p>
+  
+
+C：，需要进行实际测试并结合实际使用情况来进行分析。在选择协议时，除了考虑性能和功耗消耗等因素外，还需要注意其他因素，比如安全性、可扩展性等。
+
+
+</div>
+
+<div class="admonition quote"><p class="admonition-title">DG：能用图示帮我简单描述下它的协议细节么</p>
+  
+
+C：抱歉，我是一个文字机器人，无法用图示来描述QUIC的协议细节。但是，我可以尝试用文字来简单描述一下QUIC的协议细节。  
+<br>
+QUIC是一种基于UDP的传输层协议，它设计的初衷是为了提高网络通信的效率和安全性。QUIC在传输层上实现了一些优化措施，比如零握手、经过数据分组等。这些优化措施可以提高通信效率，并且可以保证数据的安全传输。
+<br>
+在QUIC协议中，数据传输采用了流的概念。每个数据流都有自己的标识符，并且可以独立传输。这样，QUIC可以在一个连接中同时传输多个数据流，从而提高传输效率。  
+<br>
+此外，QUIC还实现了一些安全措施，比如采用TLS加密数据传输，并使用数据包标识符来防止
+
+</div>
+
+<p><em>（又卡壳）</em></p>
+
+<div class="admonition quote"><p class="admonition-title">DG：continue</p>
+  
+
+C：重放攻击等。这些安全措施可以保证数据传输的安全性，并为用户提供更好的安全保障。
+<br>
+总的来说，QUIC是一种优化设计的传输层协议，它可以通过优化数据传输来提高网络通信的效率，并且可以保证数据的安全传输。
+
+
+</div>
+
+<h2 id="一点感悟">一点感悟</h2>
+
+<p>我对 ChatGPT 在这轮对话中的表现还是非常满意的，通过它获取知识的效率大大提升了。这可能是由于以下几个原因。</p>
+
+<p><strong>它的知识储备量足够大。</strong> 想必它的创造者们给他喂足了互联网上大量的知识和信息，使得它能够记住所有的维基百科，且能随手拈来。这就使它格外适合这类知识获取类话题的对话，因为可以只涉及相对明确的知识，而不需要更显智慧的哲学思辨类观点和人文艺术类判断。</p>
+
+<p><strong>在理解问题上，它足够智能。</strong> 和智能语音交互助手如Siri、小爱同学不同，它使用文字交互，首先就避免了由于识别不清、中英文夹杂等带来的困扰。在上下文语义关联上，也远比聊天类机器人如微软小冰智能很多，例如有话题线（Thread）的概念，对问题本身的理解能够结合语境，而且可以跨天。</p>
+
+<p><strong>在回答表述上，它总是能切中要点，而且表述非常结构化。</strong> 相比搜索引擎来说，用ChatGPT获取知识效率更高，很重要的原因就是后者总是能正确理解问题后切中要害，言简意赅地回答。它不像你搜了一篇又一篇良莠不齐的文章，有的时候需要详细但语焉不详，有的时候却洋洋洒洒不能突出重点，时间就这么浪费了。用ChatGPT则感受像是一个很博学且擅长表达的高人聊天，对方不卖弄、不厌烦，总是态度很好地耐心解答你每一个疑惑。说它擅长表达是因为它句式完整，结构化陈述，让接收信息的人非常舒服。正如 OpenAI 的 CEO Sam Altman 推特中所说，ChatGTP能根据用户给的要点拓展成一段完整的内容，也能将一段内容提炼出关键要点，相比来讲，后者更为有价值。</p>
+
+<p>当然，在接触不长的 ChatGPT 数次聊天中，也发现了一些缺陷。例如偶尔卡壳或报错，也发现了好几次知识细节有谬误之处，有的时候也偶尔会反复念叨同样内容，不能展示图片等等。但总体来说，ChatGPT 给了我眼前一亮的感受，确实让我感觉它作为一个人工智能助手，有潜力成为在日常生活中除了搜索引擎之外的另一个得力助手。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">董干</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-12-12
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/ai/">AI</a>
+          <a href="/tags/chatgpt/">ChatGPT</a>
+          <a href="/tags/quic/">QUIC</a>
+          <a href="/tags/iot/">IoT</a>
+          <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+          <a href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/">物联网</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/install-openvpn-on-ubuntu-in-3min/">
+            <span class="next-text nav-default">3分钟快速在 Ubuntu 上安装 OpenVPN</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'donggan-me';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/__gdong__" class="iconfont icon-twitter" title="twitter"></a>
+  <a href="https://donggan.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2014 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>董干</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77549857-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>

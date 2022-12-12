@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>QUIC on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/tags/quic/</link>
+    <description>Recent content in QUIC on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 11 Dec 2022 13:32:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/tags/quic/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>向AI学知识：和 ChatGPT 聊 QUIC 协议</title>
+      <link>https://donggan.me/post/learn-quic-protocol-from-chatgpt/</link>
+      <pubDate>Sun, 11 Dec 2022 13:32:00 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/learn-quic-protocol-from-chatgpt/</guid>
+      <description>&amp;ldquo;你是否曾经梦想过跟一个超级智能聊天机器人聊天？那么，让我们一起来了解 ChatGPT，这款基于大规模语言模型的聊天机器人。&amp;rd</description>
+    </item>
+    
+  </channel>
+</rss>
