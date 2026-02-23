@@ -6,7 +6,7 @@
     <description>Recent content on Gan&#39;s Blog - Dumps to digest.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 11 Dec 2022 13:32:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 24 Feb 2026 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://donggan.me/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://donggan.me/about/</guid>
       <description>Comming soon..</description>
+    </item>
+    
+    <item>
+      <title>春节两天，搭个服务器，陪女儿一起打僵尸</title>
+      <link>https://donggan.me/post/minecraft-java-bedrock-crossplay/</link>
+      <pubDate>Tue, 24 Feb 2026 00:00:00 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/minecraft-java-bedrock-crossplay/</guid>
+      <description>Mac Java 版和 Switch Bedrock 版跨平台联机，折腾两天，值了。</description>
     </item>
     
     <item>

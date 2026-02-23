@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>折腾 on Gan&#39;s Blog - Dumps to digest.</title>
+    <link>https://donggan.me/categories/%E6%8A%98%E8%85%BE/</link>
+    <description>Recent content in 折腾 on Gan&#39;s Blog - Dumps to digest.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 24 Feb 2026 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://donggan.me/categories/%E6%8A%98%E8%85%BE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>春节两天，搭个服务器，陪女儿一起打僵尸</title>
+      <link>https://donggan.me/post/minecraft-java-bedrock-crossplay/</link>
+      <pubDate>Tue, 24 Feb 2026 00:00:00 +0800</pubDate>
+      
+      <guid>https://donggan.me/post/minecraft-java-bedrock-crossplay/</guid>
+      <description>Mac Java 版和 Switch Bedrock 版跨平台联机，折腾两天，值了。</description>
+    </item>
+    
+  </channel>
+</rss>

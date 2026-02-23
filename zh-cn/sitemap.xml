@@ -9,14 +9,84 @@
   </url>
   
   <url>
-    <loc>https://donggan.me/tags/ai/</loc>
-    <lastmod>2022-12-12T01:40:48+08:00</lastmod>
+    <loc>https://donggan.me/categories/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://donggan.me/categories/</loc>
+    <loc>https://donggan.me/tags/docker/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/geyser/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/minecraft/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/post/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/%E6%8A%98%E8%85%BE/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/categories/%E6%8A%98%E8%85%BE/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/post/minecraft-java-bedrock-crossplay/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/%E6%B8%B8%E6%88%8F/</loc>
+    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://donggan.me/tags/ai/</loc>
     <lastmod>2022-12-12T01:40:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -30,13 +100,6 @@
   </url>
   
   <url>
-    <loc>https://donggan.me/</loc>
-    <lastmod>2022-12-12T01:40:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://donggan.me/tags/iot/</loc>
     <lastmod>2022-12-12T01:40:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -44,21 +107,7 @@
   </url>
   
   <url>
-    <loc>https://donggan.me/post/</loc>
-    <lastmod>2022-12-12T01:40:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://donggan.me/tags/quic/</loc>
-    <lastmod>2022-12-12T01:40:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://donggan.me/tags/</loc>
     <lastmod>2022-12-12T01:40:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

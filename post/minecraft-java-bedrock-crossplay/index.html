@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>春节两天，搭个服务器，陪女儿一起打僵尸 - Gan&#39;s Blog - Dumps to digest.</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="董干" /><meta name="description" content="Mac Java 版和 Switch Bedrock 版跨平台联机，折腾两天，值了。" /><meta name="keywords" content="Gan Dong, 董干, donggan, donggan.me" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.57.2 with theme even" />
+
+
+<link rel="canonical" href="https://donggan.me/post/minecraft-java-bedrock-crossplay/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.000d6e30802622fdc171e19eed218800c6c365d184567c00818f877d862fdbf5.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/main.css">
+
+
+<meta property="og:title" content="春节两天，搭个服务器，陪女儿一起打僵尸" />
+<meta property="og:description" content="Mac Java 版和 Switch Bedrock 版跨平台联机，折腾两天，值了。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://donggan.me/post/minecraft-java-bedrock-crossplay/" />
+<meta property="article:published_time" content="2026-02-24T00:00:00+08:00" />
+<meta property="article:modified_time" content="2026-02-24T00:00:00+08:00" />
+<meta itemprop="name" content="春节两天，搭个服务器，陪女儿一起打僵尸">
+<meta itemprop="description" content="Mac Java 版和 Switch Bedrock 版跨平台联机，折腾两天，值了。">
+
+
+<meta itemprop="datePublished" content="2026-02-24T00:00:00&#43;08:00" />
+<meta itemprop="dateModified" content="2026-02-24T00:00:00&#43;08:00" />
+<meta itemprop="wordCount" content="3035">
+
+
+
+<meta itemprop="keywords" content="minecraft,geyser,docker,游戏,折腾," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="春节两天，搭个服务器，陪女儿一起打僵尸"/>
+<meta name="twitter:description" content="Mac Java 版和 Switch Bedrock 版跨平台联机，折腾两天，值了。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/en/">
+        <li class="mobile-menu-item">En</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Gan&#39;s Blog - Dumps to digest.</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/en/">En</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">春节两天，搭个服务器，陪女儿一起打僵尸</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2026-02-24 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%8A%98%E8%85%BE/"> 折腾 </a>
+            </div>
+          <span class="more-meta"> 约 3035 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#第一条路-虚拟机">第一条路：虚拟机</a></li>
+<li><a href="#转机-geyser">转机：Geyser</a></li>
+<li><a href="#坑一-同一个账号-不能同时在线">坑一：同一个账号，不能同时在线</a></li>
+<li><a href="#坑二-switch-没有-添加服务器-的入口">坑二：Switch 没有&rdquo;添加服务器&rdquo;的入口</a></li>
+<li><a href="#坑三-podman-的文件权限">坑三：Podman 的文件权限</a></li>
+<li><a href="#坑四-终极boss-switch-连上了-但又连不上">坑四（终极Boss）：Switch 连上了，但又连不上</a></li>
+<li><a href="#深夜的小房子">深夜的小房子</a></li>
+<li><a href="#女儿偷偷哭了">女儿偷偷哭了</a></li>
+<li><a href="#从躲僵尸到冲掠夺者">从躲僵尸到冲掠夺者</a></li>
+<li><a href="#给想复现的人-关键步骤速查">给想复现的人：关键步骤速查</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    <div class="post-content">
+      
+
+<p>女儿七岁，Minecraft 玩得相当溜——创造模式里能盖出像模像样的大房子，红石机关、复杂建筑，玩得津津有味，完全不需要人教。但切到生存模式就完全不一样了：天还没黑，她就缩回屋子里不敢出门了，窗户都不敢靠近，僵尸在外面敲门她能吓得直叫。</p>
+
+<p>我就想，如果我能在游戏里陪着她呢？有爸爸在旁边帮她打僵尸，也许她就敢玩生存了？</p>
+
+<p>问题是，我玩的是 Mac 上的 Java 版，她玩的是 Switch 上的 Bedrock 版，这两个版本自古以来就不互通。这个坑我知道，所以虽然她玩 Minecraft 已经好几年了，我一直没往联机这方面想过。</p>
+
+<p>直到今年春节，我决定好好折腾一下。</p>
+
+<h2 id="第一条路-虚拟机">第一条路：虚拟机</h2>
+
+<p>第一个想法很自然：在 Mac 上跑个虚拟机，启动 Windows 版的 Bedrock，不就能联机了？</p>
+
+<p>调研了一圈，死胡同：</p>
+
+<ul>
+<li><strong>Crossover</strong>：我之前买过，试了，不支持 Minecraft</li>
+<li><strong>VirtualBox</strong>：网上没见有人跑通 Bedrock 版</li>
+<li><strong>Parallels</strong>：理论上可能行，但要额外收费，还要找 Windows 镜像，麻烦；而且用虚拟机打游戏总觉得体验会很差</li>
+</ul>
+
+<p>这条路放弃了。</p>
+
+<h2 id="转机-geyser">转机：Geyser</h2>
+
+<p>虚拟机走不通，换个思路——能不能让 Java 版服务器同时接受 Bedrock 客户端连接？</p>
+
+<p>搜了一圈，发现还真有这个方向的方案：<a href="https://geysermc.org/">Geyser</a>。它是一个协议转换层，可以让 Bedrock 客户端（包括 Switch）连入 Java 版服务器。反过来的方向（让 Java 客户端连 Bedrock 服务器）倒是没有，但这个方向刚好满足我的需求。</p>
+
+<p>最终方案的架构非常简洁：一个 Docker 容器，跑 PaperMC（Java 版服务器），同时加载 Geyser 和 Floodgate 两个插件。Java 版走 25565 TCP 端口，Switch（Bedrock）走 19132 UDP 端口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">services<span class="p">:</span><span class="w">
+</span><span class="w">  </span>mc<span class="p">:</span><span class="w">
+</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>docker.io/itzg/minecraft-server<span class="p">:</span>latest<span class="w">
+</span><span class="w">    </span>tty<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">    </span>stdin_open<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">    </span>container_name<span class="p">:</span><span class="w"> </span>mc<span class="w">
+</span><span class="w">    </span>environment<span class="p">:</span><span class="w">
+</span><span class="w">      </span>EULA<span class="p">:</span><span class="w"> </span><span class="s2">&#34;TRUE&#34;</span><span class="w">
+</span><span class="w">      </span>TYPE<span class="p">:</span><span class="w"> </span><span class="s2">&#34;PAPER&#34;</span><span class="w">
+</span><span class="w">      </span>MEMORY<span class="p">:</span><span class="w"> </span><span class="s2">&#34;2G&#34;</span><span class="w">
+</span><span class="w">      </span>ONLINE_MODE<span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span><span class="w">      </span>TZ<span class="p">:</span><span class="w"> </span><span class="s2">&#34;Asia/Shanghai&#34;</span><span class="w">
+</span><span class="w">      </span>PLUGINS<span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">        https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot</span><span class="w">
+</span><span class="w">        </span>https<span class="p">:</span>//download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot<span class="w">
+</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;0.0.0.0:25565:25565/tcp&#34;</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;0.0.0.0:19132:19132/udp&#34;</span><span class="w">
+</span><span class="w">    </span>volumes<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span>./paper<span class="p">:</span>/data<span class="w">
+</span><span class="w">    </span>restart<span class="p">:</span><span class="w"> </span>unless-stopped</code></pre></td></tr></table>
+</div>
+</div>
+<p>听起来很简单。实际上踩了不少坑。</p>
+
+<h2 id="坑一-同一个账号-不能同时在线">坑一：同一个账号，不能同时在线</h2>
+
+<p>服务器起来之后，我先用自己的 Java 版连上了。然后把 Switch 上配好，女儿也连进来了——但立刻被踢出去了。</p>
+
+<p>原因：Switch 上的 Bedrock 版需要登录微软账号才能进服务器，而我当时随手用了自己的微软账号——这个账号同时也是我 Java 版的账号。同一个账号不能在同一服务器上存在两个玩家，当然会被踢出去。</p>
+
+<p>另外这里还有个小坑：Switch 版 Minecraft 联机需要开通 <strong>Nintendo Switch Online</strong> 会员，没有会员是没法进服务器的。我给女儿的账号先开了个免费试用期。</p>
+
+<p>解决办法：给女儿单独注册一个微软账号。但新账号没有购买 Java 版，所以不能通过 Java 正版验证，这时候就需要 <strong>Floodgate</strong> 插件了——它专门用来处理 Bedrock 玩家的认证，让没有 Java 账号的 Bedrock 玩家也能正常接入 Java 服务器。</p>
+
+<p>在 Geyser 配置里把认证方式改成 <code>floodgate</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">java<span class="p">:</span><span class="w">
+</span><span class="w">  </span>auth-type<span class="p">:</span><span class="w"> </span>floodgate</code></pre></td></tr></table>
+</div>
+</div>
+<p>这个问题按照文档来就能解决，不算太难。</p>
+
+<h2 id="坑二-switch-没有-添加服务器-的入口">坑二：Switch 没有&rdquo;添加服务器&rdquo;的入口</h2>
+
+<p>Switch 上的 Minecraft Bedrock 版，有一个很反人类的设计：它的服务器列表里只有 Minecraft 官方预置的几个服务器，<strong>没有让你手动输入 IP 地址的入口</strong>。</p>
+
+<p>这个问题的解法是 <strong>BedrockConnect</strong>：通过 DNS 劫持，把 Switch 去访问那几个官方服务器的 DNS 请求拦截掉，替换成一个中间服务器的地址。连上这个中间服务器之后，会弹出一个界面让你输入真实想连的服务器地址，然后帮你转发连接。</p>
+
+<p>BedrockConnect 有公共服务器可以直接用，在路由器上把 Switch 的 DNS 改掉指向 BedrockConnect 即可。这一步照着说明做，也不算复杂。</p>
+
+<h2 id="坑三-podman-的文件权限">坑三：Podman 的文件权限</h2>
+
+<p>这个算是小坑。用 Podman（而非 Docker）跑的服务，在容器外面直接修改 Geyser 的配置文件之后，容器里的服务读不到——因为容器内 Minecraft 服务是以 <code>minecraft</code> 用户运行的，没有权限读取宿主机用户修改过的文件。</p>
+
+<p>解决方法是修改完配置后，进容器用 root 把文件 chown 给容器内的 <code>minecraft</code> 用户：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">podman <span class="nb">exec</span> -u root mc chown minecraft:minecraft /data/plugins/Geyser-Spigot/config.yml</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="坑四-终极boss-switch-连上了-但又连不上">坑四（终极Boss）：Switch 连上了，但又连不上</h2>
+
+<p>这才是真正折磨人的地方。</p>
+
+<p>Switch 能 ping 通服务器，Geyser 的 debug 日志里能看到 ping 请求，用 tcpdump 抓包也能抓到 Switch 发来的 UDP 包——但 ping 之后就没有下文了，尝试加入游戏一直超时。成功率大概是几十次里能连上一次，完全像玄学。</p>
+
+<p>为了排查这个问题，我先后：</p>
+
+<ul>
+<li>从 Podman 换成 Docker，又试了直接裸跑 Java 服务器——没有区别</li>
+<li>开启 Geyser debug 日志，确认数据包到达了服务器</li>
+<li>用 tcpdump 抓包，确认 Switch 到 19132 端口的 UDP 包能到</li>
+<li>试了手机 App「MC Connector」，用附近好友的方式接入——也不行</li>
+<li>排查了 Mac 防火墙、NAT 设置、Podman 网络转发——逐一排除</li>
+</ul>
+
+<p>最后怀疑到 <strong>UDP 握手阶段的数据包大小</strong>上：Switch 是比较老的硬件，2.4G 频段，Bedrock 协议的握手过程数据量不小，MTU 如果偏大就可能导致数据包在传输过程中被截断，握手就永远完不成。</p>
+
+<p>在 Geyser 配置里调整 MTU：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">advanced<span class="p">:</span><span class="w">
+</span><span class="w">  </span>bedrock<span class="p">:</span><span class="w">
+</span><span class="w">    </span>mtu<span class="p">:</span><span class="w"> </span><span class="m">1100</span><span class="w">  </span><span class="c"># 默认是 1400</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>从 1400 调到 1200，再调到 1100。同时把 Switch 搬到离路由器更近的地方。两个调整加在一起，连接稳定了很多。</p>
+
+<h2 id="深夜的小房子">深夜的小房子</h2>
+
+<p>折腾了整整一天，到了晚上女儿先睡觉了。我在凌晨把 MTU 从 1400 调到 1200，Switch 竟然连上了。</p>
+
+<p>当时有点激动过了头，没急着叫醒任何人，而是自己先进了游戏，造了一间小房子，然后把两个账号都操作进去，确认父女俩站在同一个屋子里——才放心地退出去睡觉。那时候已经凌晨两点了。</p>
+
+<p>第二天早上起来，第一件事就是告诉女儿。她瞬间清醒，立刻要联机。</p>
+
+<p>然后就又连不上了。</p>
+
+<p>又折腾了大半天，到下午才再次连上。两个人第一次真正在同一个世界里出生在同一个房间的时候，都激动坏了。</p>
+
+<h2 id="女儿偷偷哭了">女儿偷偷哭了</h2>
+
+<p>一起玩了几个小时之后，女儿不小心在 Switch 上切出去看了一下电量，再切回来，又进不去游戏了。</p>
+
+<p>她没说什么，悄悄躲起来哭了。妈妈发现了问她，她才说：联机好难，总也连不上。</p>
+
+<p>这让我有点意外。她一开始对联机这件事其实没什么期待，我在折腾的时候她还几次劝我：&rdquo;爸爸别弄了，连不上就算了。&rdquo;但真的一起玩过之后，感受到了不一样的乐趣，现在反倒比我还在乎能不能连上了。</p>
+
+<p>我当时心里暗暗下定决心：这个问题一定要彻底搞定。</p>
+
+<p>于是继续调，MTU 降到 1100，Switch 物理上移到路由器旁边。之后连接稳定了很多，再次连上，这次没有断。</p>
+
+<h2 id="从躲僵尸到冲掠夺者">从躲僵尸到冲掠夺者</h2>
+
+<p>女儿第一次进生存模式其实是被我&rdquo;骗&rdquo;进去的——我说我不知道这个服务器怎么开创造模式（其实是没开）。她将信将疑地跟着进来，一开始还是很小心。</p>
+
+<p>但有我在旁边，她慢慢放开了。天黑了我帮她守着，僵尸来了我帮她打，她负责跑去挖矿或者搭房子。几天游戏时间过去，房子搭起来了，装备也有了。</p>
+
+<p>有一天天刚亮，她不等我，自己主动出门去打僵尸了。后来遇到小白和掠夺者，她竟然主动往前冲。</p>
+
+<p>完全不像以前那个躲在屋里怕僵尸的小孩了。</p>
+
+<hr />
+
+<h2 id="给想复现的人-关键步骤速查">给想复现的人：关键步骤速查</h2>
+
+<p><strong>整体方案：</strong>
+- PaperMC Java 服务器 + Geyser + Floodgate 插件
+- 用 <a href="https://github.com/itzg/docker-minecraft-server">itzg/minecraft-server</a> 镜像一键启动
+- Java 版连 <code>&lt;局域网IP&gt;:25565</code>，Switch 通过 BedrockConnect 连 <code>&lt;局域网IP&gt;:19132</code></p>
+
+<p><strong>几个关键配置：</strong>
+1. Geyser 配置 <code>auth-type: floodgate</code>，让没有 Java 账号的 Bedrock 玩家可以加入
+2. Switch 联机走 BedrockConnect：在 Switch 网络设置里把主 DNS 改为 <code>104.238.130.180</code>，副 DNS 改为 <code>8.8.8.8</code>；然后进 Minecraft → 服务器列表，加入任意一个 redirect-compatible 的官方服务器（Mineville、Lifeboat、Enchanted、Galaxite、The Hive 均可），会弹出输入自定义服务器地址的界面
+3. Geyser 的 MTU 调低（尝试从 1400 → 1200 → 1100），并把 Switch 靠近路由器</p>
+
+<p><strong>如果 Switch 连不上，优先排查 UDP MTU 问题。</strong> 这个坑最隐蔽，没有明确的报错，就是握手超时，很容易被误导去排查其他方向。</p>
+
+<hr />
+
+<p>最后说一句：这次折腾前前后后用了好几个 AI 工具辅助——ChatGPT、Gemini、Claude，每个都派上了用场，帮我趟方案、辅助排查。AI 在这种&rdquo;有明确目标但方案不确定&rdquo;的折腾场景里，真的挺有用。</p>
+
+<p>两天折腾的成就感，和之后每晚一起在游戏里打怪的快乐相比，微不足道。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">董干</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2026-02-24
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/minecraft/">minecraft</a>
+          <a href="/tags/geyser/">geyser</a>
+          <a href="/tags/docker/">docker</a>
+          <a href="/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
+          <a href="/tags/%E6%8A%98%E8%85%BE/">折腾</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/learn-quic-protocol-from-chatgpt/">
+            <span class="next-text nav-default">向AI学知识：和 ChatGPT 聊 QUIC 协议</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'donggan-me';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/__gdong__" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/gdong42/" class="iconfont icon-github" title="github"></a>
+  <a href="https://donggan.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2014 - 
+    2026<span class="heart"><i class="iconfont icon-heart"></i></span><span>董干</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77549857-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
